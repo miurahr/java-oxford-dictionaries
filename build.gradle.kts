@@ -1,11 +1,16 @@
 plugins {
     groovy
-    java
     checkstyle
     jacoco
+    signing
+    `java-library`
+    `java-library-distribution`
+    `maven-publish`
     id("com.github.spotbugs") version "4.7.9"
     id("com.diffplug.spotless") version "5.17.0"
     id("com.palantir.git-version") version "0.12.3"
+    id("com.github.kt3k.coveralls") version "2.12.0"
+    id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
 }
 
 // calculate version string from git tag, hash and commit distance
@@ -17,9 +22,9 @@ if (getVersionDetails().isCleanTag) {
 }
 
 group = "tokyo.northside"
-configure<JavaPluginConvention> {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+java {
+    withSourcesJar()
+    withJavadocJar()
 }
 
 repositories {
@@ -52,16 +57,6 @@ spotbugs {
 }
 
 tasks {
-    "jacocoTestReport"(JacocoReport::class) {
-        reports {
-            // To be read by humans
-            html.isEnabled = true
-            // To be read by Coveralls etc.
-            xml.isEnabled = true
-            xml.destination = file("$buildDir/reports/jacoco/test/jacocoTestReport.xml")
-        }
-    }
-
     // Trying to run tests every time.
     val test by tasks
     val cleanTest by tasks
@@ -71,7 +66,77 @@ tasks {
     "test"(Test::class) {
         useJUnitPlatform()
     }
-
-    // Sorry, I have no idea.
     Unit
+}
+
+tasks.jacocoTestReport {
+    reports {
+        xml.required.set(true)
+        html.required.set(true)
+    }
+}
+
+coveralls {
+    jacocoReportPath = "build/reports/jacoco/test/jacocoTestReport.xml"
+}
+
+tasks.withType<JavaCompile> {
+    options.compilerArgs.add("-Xlint:deprecation")
+    options.compilerArgs.add("-Xlint:unchecked")
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("mavenJava") {
+            from(components["java"])
+            pom {
+                name.set("Java Oxford Dictionaries")
+                description.set("Java client for Oxford Dictionaries API")
+                url.set("https://github.com/miurahr/java-oxford-dictionaries")
+                licenses {
+                    license {
+                        name.set("Apache License version 2.0")
+                        url.set("http://www.apache.org/licenses/LICENSE-2.0")
+                        distribution.set("repo")
+                    }
+                }
+                developers {
+                    developer {
+                        id.set("miurahr")
+                        name.set("Hiroshi Miura")
+                        email.set("miurahr@linux.com")
+                    }
+                }
+                scm {
+                    connection.set("scm:git:git://github.com/miurahr/java-oxford-dictionaries.git")
+                    developerConnection.set("scm:git:git://github.com/miurahr/java-oxford-dictionaries.git")
+                    url.set("https://github.com/miurahr/java-oxford-dictionaries")
+                }
+            }
+        }
+    }
+}
+
+signing {
+    if (project.hasProperty("signingKey")) {
+        val signingKey: String? by project
+        val signingPassword: String? by project
+        useInMemoryPgpKeys(signingKey, signingPassword)
+    } else {
+        useGpgCmd()
+    }
+    sign(publishing.publications["mavenJava"])
+}
+tasks.withType<Sign> {
+    val hasKey = project.hasProperty("signingKey") || project.hasProperty("signing.gnupg.keyName")
+    onlyIf { hasKey && getVersionDetails().isCleanTag }
+}
+
+nexusPublishing {
+    repositories {
+        sonatype {
+            username.set(System.getenv("SONATYPE_USER"))
+            password.set(System.getenv("SONATYPE_PASS"))
+        }
+    }
 }
