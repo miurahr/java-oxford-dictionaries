@@ -76,3 +76,30 @@ Oxford Dictionaries comes with three price tiers: Prototype, Developer and Resea
 the link [https://developer.oxforddictionaries.com/?tag=#plans](https://developer.oxforddictionaries.com/?tag=#plans).
 
 Use the **AppId** and **AppKey**  when creating the client.
+
+## Usage
+
+<details open>
+<p>
+
+```java
+@Test
+@DisplayName("retrieve entries for the word 'ace'")
+void entries() {
+
+    String appId = System.getenv("APP_ID");
+    String appKey = System.getenv("APP_KEY");
+    String baseUrl = "https://od-api.oxforddictionaries.com/api/v2";
+    String lang = "en-gb";
+    boolean strictMatch = false;
+
+    OxfordClient oxfordClient = new OxfordClient(appId, appKey, baseUrl);
+
+    List<Result> entries = oxfordClient.getEntries("ace", lang, strictMatch);
+
+    assertNotNull(entries);
+}
+```
+
+</p>
+</details>

@@ -37,7 +37,7 @@ public final class OxfordClient {
         return query(getTranslationsRequestUrl(word, source, target));
     }
 
-    public List<Result> getDefinitions(final String word, final String language, final boolean strict) throws OxfordClientException {
+    public List<Result> getEntries(final String word, final String language, final boolean strict) throws OxfordClientException {
         return query(getEntriesRequestUrl(word, language, strict));
     }
 
