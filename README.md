@@ -11,7 +11,7 @@ When you want to use complete implemetation of Oxford Dictionaries API on JVM,
 
 ## Supported endpoints
 
-The API currently supports just a small part of endpoints.
+The API currently supports just a small part of endpoints; `entries` and `translations`
 <details>
 <summary>endpoints</summary>
 <p>
@@ -79,9 +79,6 @@ Use the **AppId** and **AppKey**  when creating the client.
 
 ## Usage
 
-<details open>
-<p>
-
 ```java
 @Test
 @DisplayName("retrieve entries for the word 'ace'")
@@ -94,15 +91,9 @@ void entries() {
     boolean strictMatch = false;
 
     OxfordClient oxfordClient = new OxfordClient(appId, appKey, baseUrl);
-    List<Result> entries = oxfordClient.getEntries("ace", lang, strictMatch);
+    List<Result> results = oxfordClient.getEntries("ace", lang, strictMatch);
 }
 ```
-
-</p>
-</details>
-
-<details open>
-<p>
 
 ```java
 @Test
@@ -116,9 +107,6 @@ void entries() {
     String target = "fr";
 
     OxfordClient oxfordClient = new OxfordClient(appId, appKey, baseUrl);
-    List<Result> entries = oxfordClient.getTranslations("ace", source, target);
+    List<Result> results = oxfordClient.getTranslations("ace", source, target);
 }
 ```
-
-</p>
-</details>
