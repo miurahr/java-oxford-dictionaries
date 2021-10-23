@@ -94,10 +94,29 @@ void entries() {
     boolean strictMatch = false;
 
     OxfordClient oxfordClient = new OxfordClient(appId, appKey, baseUrl);
-
     List<Result> entries = oxfordClient.getEntries("ace", lang, strictMatch);
+}
+```
 
-    assertNotNull(entries);
+</p>
+</details>
+
+<details open>
+<p>
+
+```java
+@Test
+@DisplayName("retrieve translations for the word 'ace'")
+void entries() {
+
+    String appId = System.getenv("APP_ID");
+    String appKey = System.getenv("APP_KEY");
+    String baseUrl = "https://od-api.oxforddictionaries.com/api/v2";
+    String source = "en-gb";
+    String target = "fr";
+
+    OxfordClient oxfordClient = new OxfordClient(appId, appKey, baseUrl);
+    List<Result> entries = oxfordClient.getTranslations("ace", source, target);
 }
 ```
 
