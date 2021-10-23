@@ -56,19 +56,6 @@ spotbugs {
     }
 }
 
-tasks {
-    // Trying to run tests every time.
-    val test by tasks
-    val cleanTest by tasks
-    test.dependsOn(cleanTest)
-
-    // Use the built-in JUnit support of Gradle.
-    "test"(Test::class) {
-        useJUnitPlatform()
-    }
-    Unit
-}
-
 tasks.jacocoTestReport {
     reports {
         xml.required.set(true)
