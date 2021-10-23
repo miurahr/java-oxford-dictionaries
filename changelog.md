@@ -3,9 +3,12 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
-## [v0.1.0]
+## [v0.1.1]
+* Bump Gradle@7.2
 
+## [v0.1.0]
 * First alpha
 
-[Unreleased]: https://github.com/miurahr/java-oxford-dictionaries/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/miurahr/java-oxford-dictionaries/compare/v0.1.1...HEAD
+[v0.1.1]: https://github.com/miurahr/java-oxford-dictionaries/compare/v0.1.0...v0.1.1
 [v0.1.0]: https://github.com/miurahr/java-oxford-dictionaries/compare/v0.0.1...v0.1.0
