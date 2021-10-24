@@ -31,6 +31,10 @@ public class CrossReference {
 
     @Override
     public String toString() {
-        return "CrossReference{" + "id='" + id + '\'' + ", text='" + text + '\'' + ", type='" + type + '\'' + '}';
+        return "CrossReference{" +
+                "id='" + id + '\'' +
+                ", text='" + text + '\'' +
+                ", type='" + type + '\'' +
+                '}';
     }
 }

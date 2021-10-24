@@ -46,7 +46,7 @@ public class Pronunciation {
         return regions;
     }
 
-    public void setRegions(List<Region> regions) {
+    public void setRegions(final List<Region> regions) {
         this.regions = regions;
     }
 
@@ -54,13 +54,19 @@ public class Pronunciation {
         return registers;
     }
 
-    public void setRegisters(List<Register> registers) {
+    public void setRegisters(final List<Register> registers) {
         this.registers = registers;
     }
 
     @Override
     public String toString() {
-        return "Pronounciation{" + "dialects=" + dialects + ", phoneticNotation='" + phoneticNotation + '\'' +
-               ", phoneticSpelling='" + phoneticSpelling + '\'' + ", audioFIle='" + audioFile + '\'' + '}';
+        return "Pronunciation{" +
+                "dialects=" + dialects +
+                ", phoneticNotation='" + phoneticNotation + '\'' +
+                ", phoneticSpelling='" + phoneticSpelling + '\'' +
+                ", audioFile='" + audioFile + '\'' +
+                ", regions=" + regions +
+                ", registers=" + registers +
+                '}';
     }
 }

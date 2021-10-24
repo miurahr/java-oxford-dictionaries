@@ -14,6 +14,9 @@ public class LexicalEntry {
     private List<PhrasalVerb> phrasalVerbs;
     private List<GrammaticalFeature> grammaticalFeatures;
     private List<VariantForm> variantForms;
+    private List<Note> notes;
+    private List<Pronunciation> pronunciations;
+    private String root;
 
     public List<Compound> getCompounds() {
         return compounds;
@@ -91,7 +94,7 @@ public class LexicalEntry {
         return grammaticalFeatures;
     }
 
-    public void setGrammaticalFeatures(List<GrammaticalFeature> grammaticalFeatures) {
+    public void setGrammaticalFeatures(final List<GrammaticalFeature> grammaticalFeatures) {
         this.grammaticalFeatures = grammaticalFeatures;
     }
 
@@ -99,7 +102,51 @@ public class LexicalEntry {
         return variantForms;
     }
 
-    public void setVariantForms(List<VariantForm> variantForms) {
+    public void setVariantForms(final List<VariantForm> variantForms) {
         this.variantForms = variantForms;
+    }
+
+    public List<Note> getNotes() {
+        return notes;
+    }
+
+    public void setNotes(final List<Note> notes) {
+        this.notes = notes;
+    }
+
+    public List<Pronunciation> getPronunciations() {
+        return pronunciations;
+    }
+
+    public void setPronunciations(final List<Pronunciation> pronunciations) {
+        this.pronunciations = pronunciations;
+    }
+
+    public String getRoot() {
+        return root;
+    }
+
+    public void setRoot(final String root) {
+        this.root = root;
+    }
+
+    @Override
+    public String toString() {
+        return "LexicalEntry{" +
+                "compounds=" + compounds +
+                ", entries=" + entries +
+                ", language='" + language + '\'' +
+                ", text='" + text + '\'' +
+                ", lexicalCategory=" + lexicalCategory +
+                ", derivatives=" + derivatives +
+                ", derivativeOf=" + derivativeOf +
+                ", phrases=" + phrases +
+                ", phrasalVerbs=" + phrasalVerbs +
+                ", grammaticalFeatures=" + grammaticalFeatures +
+                ", variantForms=" + variantForms +
+                ", notes=" + notes +
+                ", pronunciations=" + pronunciations +
+                ", root='" + root + '\'' +
+                '}';
     }
 }

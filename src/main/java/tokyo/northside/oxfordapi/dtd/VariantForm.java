@@ -14,7 +14,7 @@ public class VariantForm {
         return domains;
     }
 
-    public void setDomains(List<Domain> domains) {
+    public void setDomains(final List<Domain> domains) {
         this.domains = domains;
     }
 
@@ -22,7 +22,7 @@ public class VariantForm {
         return regions;
     }
 
-    public void setRegions(List<Region> regions) {
+    public void setRegions(final List<Region> regions) {
         this.regions = regions;
     }
 
@@ -30,7 +30,7 @@ public class VariantForm {
         return registers;
     }
 
-    public void setRegisters(List<Register> registers) {
+    public void setRegisters(final List<Register> registers) {
         this.registers = registers;
     }
 
@@ -46,7 +46,7 @@ public class VariantForm {
         return notes;
     }
 
-    public void setNotes(List<Note> notes) {
+    public void setNotes(final List<Note> notes) {
         this.notes = notes;
     }
 
@@ -60,6 +60,13 @@ public class VariantForm {
 
     @Override
     public String toString() {
-        return "VariantForm{" + "pronunciations=" + pronunciations + ", text='" + text + '\'' + '}';
+        return "VariantForm{" +
+                "domains=" + domains +
+                ", regions=" + regions +
+                ", registers=" + registers +
+                ", pronunciations=" + pronunciations +
+                ", notes=" + notes +
+                ", text='" + text + '\'' +
+                '}';
     }
 }

@@ -30,7 +30,7 @@ public class SynonymAntonym {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(final String id) {
         this.id = id;
     }
 
@@ -38,7 +38,7 @@ public class SynonymAntonym {
         return domains;
     }
 
-    public void setDomains(List<Domain> domains) {
+    public void setDomains(final List<Domain> domains) {
         this.domains = domains;
     }
 
@@ -46,7 +46,7 @@ public class SynonymAntonym {
         return regions;
     }
 
-    public void setRegions(List<Region> regions) {
+    public void setRegions(final List<Region> regions) {
         this.regions = regions;
     }
 
@@ -54,12 +54,19 @@ public class SynonymAntonym {
         return registers;
     }
 
-    public void setRegisters(List<Register> registers) {
+    public void setRegisters(final List<Register> registers) {
         this.registers = registers;
     }
 
     @Override
     public String toString() {
-        return "Synonym{" + "language='" + language + '\'' + ", text='" + text + '\'' + '}';
+        return "SynonymAntonym{" +
+                "id='" + id + '\'' +
+                ", domains=" + domains +
+                ", language='" + language + '\'' +
+                ", regions=" + regions +
+                ", registers=" + registers +
+                ", text='" + text + '\'' +
+                '}';
     }
 }

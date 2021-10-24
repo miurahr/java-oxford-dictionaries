@@ -8,6 +8,7 @@ public class Result {
     private List<LexicalEntry> lexicalEntries;
     private String type;
     private String word;
+    private List<Pronunciation> pronunciations;
 
     public String getId() {
         return id;
@@ -49,9 +50,24 @@ public class Result {
         this.word = word;
     }
 
+    public List<Pronunciation> getPronunciations() {
+        return pronunciations;
+    }
+
+    public void setPronunciations(final List<Pronunciation> pronunciations) {
+        this.pronunciations = pronunciations;
+    }
+
     @Override
     public String toString() {
-        return "Results{" + "id='" + id + '\'' + ", language='" + language + '\'' +
-                ", lexicalEntries=" + lexicalEntries + ", type='" + type + '\'' + ", word='" + word + '\'' + '}';
+        return "Result{" +
+                "id='" + id + '\'' +
+                ", language='" + language + '\'' +
+                ", lexicalEntries=" + lexicalEntries +
+                ", type='" + type + '\'' +
+                ", word='" + word + '\'' +
+                ", pronunciations=" + pronunciations +
+                '}';
     }
+
 }

@@ -9,7 +9,7 @@ public class Note {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(final String id) {
         this.id = id;
     }
 
@@ -31,6 +31,10 @@ public class Note {
 
     @Override
     public String toString() {
-        return "Note{" + "text='" + text + '\'' + ", type='" + type + '\'' + '}';
+        return "Note{" +
+                "id='" + id + '\'' +
+                ", text='" + text + '\'' +
+                ", type='" + type + '\'' +
+                '}';
     }
 }

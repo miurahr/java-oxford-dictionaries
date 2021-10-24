@@ -23,6 +23,9 @@ public class Sense {
     private List<Domain> domains;
     private List<Note> notes;
     private List<VariantForm> variantForms;
+    private List<String> etymologies;
+    private List<Pronunciation> pronunciations;
+    private List<DatasetCrossLink> datasetCrossLinks;
 
     public List<String> getDefinitions() {
         return definitions;
@@ -184,10 +187,35 @@ public class Sense {
         this.variantForms = variantForms;
     }
 
+    public List<String> getEtymologies() {
+        return etymologies;
+    }
+
+    public void setEtymologies(final List<String> etymologies) {
+        this.etymologies = etymologies;
+    }
+
+    public List<Pronunciation> getPronunciations() {
+        return pronunciations;
+    }
+
+    public void setPronunciations(final List<Pronunciation> pronunciations) {
+        this.pronunciations = pronunciations;
+    }
+
+    public List<DatasetCrossLink> getDatasetCrossLinks() {
+        return datasetCrossLinks;
+    }
+
+    public void setDatasetCrossLinks(final List<DatasetCrossLink> datasetCrossLinks) {
+        this.datasetCrossLinks = datasetCrossLinks;
+    }
+
     @Override
     public String toString() {
         return "Sense{" +
                 "definitions=" + definitions +
+                ", antonyms=" + antonyms +
                 ", domainClasses=" + domainClasses +
                 ", examples=" + examples +
                 ", id='" + id + '\'' +
@@ -196,6 +224,7 @@ public class Sense {
                 ", subsenses=" + subsenses +
                 ", synonyms=" + synonyms +
                 ", thesaurusLinks=" + thesaurusLinks +
+                ", translations=" + translations +
                 ", registers=" + registers +
                 ", regions=" + regions +
                 ", crossReferenceMarkers=" + crossReferenceMarkers +
@@ -204,8 +233,10 @@ public class Sense {
                 ", constructions=" + constructions +
                 ", domains=" + domains +
                 ", notes=" + notes +
-                ", translations=" + translations +
-                ", variantMorms= " + variantForms +
+                ", variantForms=" + variantForms +
+                ", etymologies=" + etymologies +
+                ", pronunciations=" + pronunciations +
+                ", datasetCrossLinks=" + datasetCrossLinks +
                 '}';
     }
 }

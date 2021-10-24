@@ -7,6 +7,7 @@ public class DerivativeOf {
     private String id;
     private String language;
     private List<Region> regions;
+    private List<Register> registers;
     private String text;
 
     public List<Domain> getDomains() {
@@ -41,6 +42,14 @@ public class DerivativeOf {
         this.regions = regions;
     }
 
+    public List<Register> getRegisters() {
+        return registers;
+    }
+
+    public void setRegisters(final List<Register> registers) {
+        this.registers = registers;
+    }
+
     public String getText() {
         return text;
     }
@@ -49,14 +58,5 @@ public class DerivativeOf {
         this.text = text;
     }
 
-    @Override
-    public String toString() {
-        return "DerivativeOf{" +
-                "domains=" + domains +
-                ", id='" + id + '\'' +
-                ", language='" + language + '\'' +
-                ", regions=" + regions +
-                ", text='" + text + '\'' +
-                '}';
-    }
+
 }

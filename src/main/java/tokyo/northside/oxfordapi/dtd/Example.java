@@ -9,6 +9,9 @@ public class Example {
     private List<Note> notes;
     private List<Region> regions;
     private List<Register> registers;
+    private List<Collocation> collocations;
+    private List<String> crossReferenceMarkers;
+    private List<CrossReference> crossReferences;
     private String text;
 
     private List<String> senseIds;
@@ -74,13 +77,48 @@ public class Example {
         return definitions;
     }
 
-    public void setDefinitions(List<String> definitions) {
+    public void setDefinitions(final List<String> definitions) {
         this.definitions = definitions;
+    }
+
+    public List<Collocation> getCollocations() {
+        return collocations;
+    }
+
+    public void setCollocations(final List<Collocation> collocations) {
+        this.collocations = collocations;
+    }
+
+    public List<String> getCrossReferenceMarkers() {
+        return crossReferenceMarkers;
+    }
+
+    public void setCrossReferenceMarkers(final List<String> crossReferenceMarkers) {
+        this.crossReferenceMarkers = crossReferenceMarkers;
+    }
+
+    public List<CrossReference> getCrossReferences() {
+        return crossReferences;
+    }
+
+    public void setCrossReferences(final List<CrossReference> crossReferences) {
+        this.crossReferences = crossReferences;
     }
 
     @Override
     public String toString() {
-        return "Example{" + "registers=" + registers + ", text='" + text + '\'' + ", notes=" + notes +
-                ", senseIds=" + senseIds + ", translations=" + translations + ", domains=" + domains +  '}';
+        return "Example{" +
+                "definitions=" + definitions +
+                ", domains=" + domains +
+                ", notes=" + notes +
+                ", regions=" + regions +
+                ", registers=" + registers +
+                ", collocations=" + collocations +
+                ", crossReferenceMarkers=" + crossReferenceMarkers +
+                ", crossReferences=" + crossReferences +
+                ", text='" + text + '\'' +
+                ", senseIds=" + senseIds +
+                ", translations=" + translations +
+                '}';
     }
 }
