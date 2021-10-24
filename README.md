@@ -1,17 +1,22 @@
 # Java Oxford Dictionaries
 
-Java client for the Oxford Dictionaries API.
+Java client for the Oxford Dictionaries API (herebyafter calls the OD API).
 
 This projects aims to facilitate the interaction with the Oxford Dictionaries API.
-A complete documentation for the API can be reached at:
+A complete documentation for the OD API can be reached at:
 https://developer.oxforddictionaries.com/documentation.
 
-When you want to use complete implemetation of Oxford Dictionaries API on JVM,
- I recommend [Kotlin-oxford-dictionaries library found at maven central](https://search.maven.org/artifact/com.github.sparkmuse/kotlin-oxford-dictionaries)
+A development status is considered `ALPHA`.
+A programming interface will be changed.
+
+When you want to use complete implementation of the OD API client on JVM,
+I recommend [Kotlin-oxford-dictionaries library](https://search.maven.org/artifact/com.github.sparkmuse/kotlin-oxford-dictionaries) 
+for productions.
 
 ## Supported endpoints
 
-The API currently supports just a small part of endpoints; `entries` and `translations`
+The client supports basic two endpoints of the OD API; `entries` and `translations`.
+
 <details>
 <summary>endpoints</summary>
 <p>
@@ -21,7 +26,7 @@ The API currently supports just a small part of endpoints; `entries` and `transl
 | /api/v2/entries/{source_lang}/{word_id}:                                         	|      ✅     	|
 | /api/v2/lemmas/{source_lang}/{word_id}:                                          	|           	|
 | /api/v2/translations/{source_lang_translate}/{target_lang_translate}/{word_id}:  	|      ✅     	|
-| /api/v2/thesaurus/{lang}/{word_id}:                                              	|           	|
+| /api/v2/thesaurus/{lang}/{word_id}:                                              	|            	|
 | /api/v2/sentences/{source_lang}/{word_id}:                                       	|           	|
 | /api/v2/words/{source_lang}:                                                     	|           	|
 | /api/v2/inflections/{source_lang}/{word_id}:                                    	|           	|
@@ -52,6 +57,8 @@ The API currently supports just a small part of endpoints; `entries` and `transl
 All needed to start using the project is to add the dependency
 
 **Maven**
+<details><p>
+
 ```xml
 <dependency>
   <groupId>tokyo.northside</groupId>
@@ -60,13 +67,15 @@ All needed to start using the project is to add the dependency
 </dependency>
 ```
 
+</p></details>
+
 **Gradle Kotlin DSL**
-```shell script
+```console
 implementation("tokyo.northside:java-oxford-dictionaries:0.1.0")
 ```
 
 **Gradle**
-```shell script
+```console
 implementation 'tokyo.northside:java-oxford-dictionaries:0.1.0'
 ```
 
@@ -77,36 +86,90 @@ the link [https://developer.oxforddictionaries.com/?tag=#plans](https://develope
 
 Use the **AppId** and **AppKey**  when creating the client.
 
-## Usage
+## Usage in Java application
+
+1. query definition, and return HTML format of definitions.
+
+<details>
+<p>
 
 ```java
-@Test
-@DisplayName("retrieve entries for the word 'ace'")
-void entries() {
-
-    String appId = System.getenv("APP_ID");
-    String appKey = System.getenv("APP_KEY");
-    String baseUrl = "https://od-api.oxforddictionaries.com/api/v2";
-    String lang = "en-gb";
-    boolean strictMatch = false;
-
-    OxfordClient oxfordClient = new OxfordClient(appId, appKey, baseUrl);
-    List<Result> results = oxfordClient.getEntries("ace", lang, strictMatch);
+class Main {
+ public static String getDefinitions() {
+  String appId = System.getenv("APP_ID");
+  String appKey = System.getenv("APP_KEY");
+  String baseUrl = "https://od-api.oxforddictionaries.com/api/v2";
+  String lang = "en-gb";
+  boolean strictMatch = false;
+  String word = "ace";
+  //
+  OxfordClient oxfordClient = new OxfordClient(appId, appKey, baseUrl);
+  List<Result> results = oxfordClient.getEntries(word, lang, strictMatch);
+  //
+  Result result = results.get(0);
+  assert(result.getId().equals(word));
+  //
+  StringBuilder sb = new StringBuilder();
+  List<LexicalEntry> lexicalEntries = result.getLExicalEntries();
+  String title = lexicalEntry.getText();
+  sb.append("<h3>").append(title).append("</h3>");
+  for (LexicalEntry lexicalEntry: lexicalEntries) {
+   sb.append("<ol>");
+   for (Entry entry : lexicalEntry.getEntries()) {
+    for (Sense sense : entry.getSenses()) {
+     if (sense.getDefinitions() == null) {
+      continue;
+     }
+     for (String text : sense.getDefinitions()) {
+      sb.append("<li>").append(text).append("</li>");
+     }
+    }
+   }
+   sb.append("</ol>");
+  }
+  return sb.toString();
+ }
 }
 ```
 
+</p></details>
+
+2. query translations in French.
+
+<details>
+<p>
+
 ```java
-@Test
-@DisplayName("retrieve translations for the word 'ace'")
-void entries() {
+import java.util.ArrayList;
 
-    String appId = System.getenv("APP_ID");
-    String appKey = System.getenv("APP_KEY");
-    String baseUrl = "https://od-api.oxforddictionaries.com/api/v2";
-    String source = "en-gb";
-    String target = "fr";
-
-    OxfordClient oxfordClient = new OxfordClient(appId, appKey, baseUrl);
-    List<Result> results = oxfordClient.getTranslations("ace", source, target);
+class Main {
+ public static List<String> getTranslations() {
+  String appId = System.getenv("APP_ID");
+  String appKey = System.getenv("APP_KEY");
+  String baseUrl = "https://od-api.oxforddictionaries.com/api/v2";
+  String source = "en-gb";
+  String target = "fr";
+  String word = "ace";
+  //
+  OxfordClient oxfordClient = new OxfordClient(appId, appKey, baseUrl);
+  List<Result> results = oxfordClient.getTranslations(word, source, target);
+  //
+  Result result = results.get(0);
+  assert (result.getId().equals(word));
+  //
+  List<LexialEntry> lexicalEntries = result.getLexicalEntries();
+  List<Entry> entries = lexicalEntries.get(0).getEntries();
+  List<Sense> senses = entries.get(0).getSenses();
+  List<Translation> translations = senses.get(0).getTranslations();
+  //
+  List<String> out = new ArrayList<>();
+  for (Translation translation : translations) {
+        out.add(translation.getText());
+  }
+  return out;
+ }
 }
 ```
+
+</p>
+</details>

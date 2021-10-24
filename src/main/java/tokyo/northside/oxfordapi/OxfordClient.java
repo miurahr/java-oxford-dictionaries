@@ -16,35 +16,106 @@ import tokyo.northside.oxfordapi.dtd.Result;
 
 import java.io.IOException;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Oxford dictionaries API access client.
+ *
+ * @author Hiroshi Miura
+ */
 public final class OxfordClient {
 
+    private static final String BASE_URL_V2 = "https://od-api.oxforddictionaries.com/api/v2";
     private final String endpointUrl;
-
     private final String appId;
     private final String appKey;
 
+    /**
+     * Constructor with baseURL.
+     *
+     * @param appId AppId of the OD API credentials.
+     * @param appKey AppKey of the OD API credentials.
+     * @param baseUrl base URL of the OD API v2.
+     */
     public OxfordClient(final String appId, final String appKey, final String baseUrl) {
         this.appId = appId;
         this.appKey = appKey;
         endpointUrl = baseUrl;
     }
 
+    /**
+     * Construcotr with default v2 URL.
+     *
+     * @param appId AppId of the OD API credentials.
+     * @param appKey AppKey of the OD API credentials.
+     */
+    public OxfordClient(final String appId, final String appKey) {
+        this(appId, appKey, BASE_URL_V2);
+    }
+
+    /**
+     * Exception class for the OD API client.
+     */
+    public static class OxfordClientException extends Exception {
+        /**
+         * Constructs a new exception with the specified detail message.
+         *
+         * @param message the detail message. The detail message is saved for
+         *                later retrieval by the {@link #getMessage()} method.
+         */
+        public OxfordClientException(final String message) {
+            super(message);
+        }
+    }
+
+    /**
+     * Get result of `translations` endpoint query.
+     *
+     * @param word query word
+     * @param source source language in lower case, such as "en-gb", "en-us", and "fr"
+     * @param target target language in lower case
+     * @return List of Result object.
+     * @throws OxfordClientException when connection or parse error occurred
+     */
     public List<Result> getTranslations(final String word, final String source, final String target)
             throws OxfordClientException {
-        return query(getTranslationsRequestUrl(word, source, target));
+        RequestFactory f = new RequestFactory(endpointUrl, appId, appKey);
+        f.setType(RequestFactory.QueryType.TRANSLATIONS);
+        f.setSourceLanguage(source);
+        f.setTargetLanguage(target);
+        f.setQueryWord(word);
+        return query(f.getUrl(), f.getHeader());
     }
 
+    /**
+     * Get result of `entries` endpoint query.
+     *
+     * @param word query word
+     * @param language query language in lower case, such as "en-gb", "en-us", and "fr"
+     * @param strict boolean whether match is strict
+     * @return List of Result object.
+     * @throws OxfordClientException when connection or parse error occurred
+     */
     public List<Result> getEntries(final String word, final String language, final boolean strict)
             throws OxfordClientException {
-        return query(getEntriesRequestUrl(word, language, strict));
+        RequestFactory f = new RequestFactory(endpointUrl, appId, appKey);
+        f.setType(RequestFactory.QueryType.ENTRIES);
+        f.setLanguage(language);
+        f.setQueryWord(word);
+        f.setStrictMatch(strict);
+        return query(f.getUrl(), f.getHeader());
     }
 
-    private List<Result> query(final String requestUrl) throws OxfordClientException {
-        Map<String, Object> header = getHeaderEntries();
+    /**
+     * Oxford dictionaries API query method.
+     *
+     * @param requestUrl request URL returned from RequestFactory.getURL()
+     * @param header header parameters returned from ReqeustFactory.getHeader()
+     * @return List of Result objects.
+     * @throws OxfordClientException when connection or parse error occurred
+     */
+    public List<Result> query(final String requestUrl, final Map<String, Object> header) throws OxfordClientException {
         String response;
         try (CloseableHttpClient httpclient = HttpClients.createDefault()) {
             HttpGet httpGet = new HttpGet(requestUrl);
@@ -66,63 +137,7 @@ public final class OxfordClient {
         return Collections.emptyList();
     }
 
-    private String getEntriesRequestUrl(final String word, final String language, final boolean strict) {
-        final String strictMatch;
-        if (strict) {
-            strictMatch = "true";
-        } else {
-            strictMatch = "false";
-        }
-        final String wordId = word.toLowerCase();
-        String lang;
-        if (language.equals("en")) {
-            lang = "en-gb";
-        } else {
-            lang = language;
-        }
-        return String.format("%sentries/%s/%s?strictMatch=%s", endpointUrl, lang, wordId, strictMatch);
-    }
-
-    private String getTranslationsRequestUrl(final String word, final String sourceLang, final String targetLang) {
-        final String wordId = word.toLowerCase();
-        String source;
-        String target;
-        if (sourceLang.equals("en")) {
-            source = "en-gb";
-        } else {
-            source = sourceLang;
-        }
-        if (targetLang.equals("en")) {
-            target = "en-gb";
-        } else {
-            target = targetLang;
-        }
-        return String.format("%stranslations/%s/%s?q=%s", endpointUrl, source, target, wordId);
-    }
-
-    private Map<String, Object> getHeaderEntries() {
-        Map<String, Object> header = new HashMap<>();
-        header.put("Accept", "application/json");
-        header.put("app_id", appId);
-        header.put("app_key", appKey);
-        return header;
-    }
-
-    public static class OxfordClientException extends Exception {
-        /**
-         * Constructs a new exception with the specified detail message.  The
-         * cause is not initialized, and may subsequently be initialized by
-         * a call to {@link #initCause}.
-         *
-         * @param message the detail message. The detail message is saved for
-         *                later retrieval by the {@link #getMessage()} method.
-         */
-        public OxfordClientException(final String message) {
-            super(message);
-        }
-    }
-
-    static final HttpClientResponseHandler<String> RESPONSE_HANDLER = response -> {
+    private static final HttpClientResponseHandler<String> RESPONSE_HANDLER = response -> {
         final int status = response.getCode();
         if (status >= HttpStatus.SC_SUCCESS && status < HttpStatus.SC_REDIRECTION) {
             try (HttpEntity entity = response.getEntity()) {
