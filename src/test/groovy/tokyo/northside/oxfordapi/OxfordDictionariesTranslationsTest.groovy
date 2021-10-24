@@ -13,8 +13,9 @@ import static org.junit.Assert.*
 class OxfordDictionariesTranslationsTest {
 
     @Test
-    void testTranslationsParse1() {
-        InputStream resource = OxfordClient.class.getClassLoader().getResourceAsStream("oxfordapi/translation_result1.json")
+    void testTranslationsParseResult1() {
+        InputStream resource = OxfordClient.class.getClassLoader()
+                .getResourceAsStream("oxfordapi/results/translation_result1.json")
         def json = IOUtils.toString(resource, "UTF-8")
         ObjectMapper mapper = new ObjectMapper()
         JsonNode node = mapper.readTree(json)

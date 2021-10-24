@@ -11,8 +11,9 @@ import static org.junit.Assert.*
 
 class OxfordDictionaryEntriesTest {
     @Test
-    void testParse1() {
-        InputStream resource = OxfordClient.class.getClassLoader().getResourceAsStream("oxfordapi/entry_result1.json")
+    void testEntriesParseResult1() {
+        InputStream resource = OxfordClient.class.getClassLoader()
+                .getResourceAsStream("oxfordapi/results/entry_result1.json")
         String json = IOUtils.toString(resource, "UTF-8")
         ObjectMapper mapper = new ObjectMapper()
         JsonNode node = mapper.readTree(json)
@@ -20,7 +21,18 @@ class OxfordDictionaryEntriesTest {
         def results = mapper.readValue(node.traverse(), new TypeReference<List<Result>>() {})
         Result result = results.get(0)
         assertEquals("ace", result.getId())
-
     }
 
+    @Test
+    void testEntriesParseModel() {
+        InputStream resource = OxfordClient.class.getClassLoader()
+                .getResourceAsStream("oxfordapi/models/entry_model.json")
+        String json = IOUtils.toString(resource, "UTF-8")
+        ObjectMapper mapper = new ObjectMapper()
+        JsonNode node = mapper.readTree(json)
+        node = node.get("results")
+        def results = mapper.readValue(node.traverse(), new TypeReference<List<Result>>() {})
+        Result result = results.get(0)
+        assertEquals("string", result.getId())
+    }
 }

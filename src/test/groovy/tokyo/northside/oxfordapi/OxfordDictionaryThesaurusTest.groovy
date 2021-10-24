@@ -12,8 +12,9 @@ import static org.junit.Assert.assertEquals
 class OxfordDictionaryThesaurusTest {
 
     @Test
-    void testParse1() {
-        InputStream resource = OxfordClient.class.getClassLoader().getResourceAsStream("oxfordapi/thesaurus_result1.json")
+    void testThesaurusParseModel() {
+        InputStream resource = OxfordClient.class.getClassLoader()
+                .getResourceAsStream("oxfordapi/models/thesaurus_model.json")
         String json = IOUtils.toString(resource, "UTF-8")
         ObjectMapper mapper = new ObjectMapper()
         JsonNode node = mapper.readTree(json)
