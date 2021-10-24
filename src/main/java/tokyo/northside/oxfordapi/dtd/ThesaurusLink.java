@@ -1,27 +1,31 @@
 package tokyo.northside.oxfordapi.dtd;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class ThesaurusLink {
-    private String entry_id;
-    private String sense_id;
+    @JsonProperty("entry_id")
+    private String entryId;
+    @JsonProperty("sense_id")
+    private String senseId;
 
-    public String getEntry_id() {
-        return entry_id;
+    public String getEntryId() {
+        return entryId;
     }
 
-    public void setEntry_id(final String entry_id) {
-        this.entry_id = entry_id;
+    public void setEntryId(final String entryId) {
+        this.entryId = entryId;
     }
 
-    public String getSense_id() {
-        return sense_id;
+    public String getSenseId() {
+        return senseId;
     }
 
-    public void setSense_id(final String sense_id) {
-        this.sense_id = sense_id;
+    public void setSenseId(final String senseId) {
+        this.senseId = senseId;
     }
 
     @Override
     public String toString() {
-        return "ThesaurusLink{" + "entry_id='" + entry_id + '\'' + ", sense_id='" + sense_id + '\'' + '}';
+        return "ThesaurusLink{" + "entry_id='" + entryId + '\'' + ", sense_id='" + senseId + '\'' + '}';
     }
 }

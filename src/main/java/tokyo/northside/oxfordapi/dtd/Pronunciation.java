@@ -7,6 +7,8 @@ public class Pronunciation {
     private String phoneticNotation;
     private String phoneticSpelling;
     private String audioFile;
+    private List<Region> regions;
+    private List<Register> registers;
 
     public List<String> getDialects() {
         return dialects;
@@ -38,6 +40,22 @@ public class Pronunciation {
 
     public void setAudioFile(final String audioFile) {
         this.audioFile = audioFile;
+    }
+
+    public List<Region> getRegions() {
+        return regions;
+    }
+
+    public void setRegions(List<Region> regions) {
+        this.regions = regions;
+    }
+
+    public List<Register> getRegisters() {
+        return registers;
+    }
+
+    public void setRegisters(List<Register> registers) {
+        this.registers = registers;
     }
 
     @Override

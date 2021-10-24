@@ -4,13 +4,15 @@ package tokyo.northside.oxfordapi.dtd;
 import java.util.List;
 
 public class Example {
+    private List<String> definitions;
+    private List<Domain> domains;
+    private List<Note> notes;
+    private List<Region> regions;
     private List<Register> registers;
     private String text;
-    private List<Note> notes;
+
     private List<String> senseIds;
     private List<Translation> translations;
-    private List<Region> regions;
-    private List<Domain> domains;
 
     public List<Register> getRegisters() {
         return registers;
@@ -66,6 +68,14 @@ public class Example {
 
     public void setDomains(final List<Domain> domains) {
         this.domains = domains;
+    }
+
+    public List<String> getDefinitions() {
+        return definitions;
+    }
+
+    public void setDefinitions(List<String> definitions) {
+        this.definitions = definitions;
     }
 
     @Override

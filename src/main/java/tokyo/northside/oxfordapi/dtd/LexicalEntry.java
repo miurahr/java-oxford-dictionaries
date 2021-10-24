@@ -12,6 +12,8 @@ public class LexicalEntry {
     private List<DerivativeOf> derivativeOf;
     private List<Phrase> phrases;
     private List<PhrasalVerb> phrasalVerbs;
+    private List<GrammaticalFeature> grammaticalFeatures;
+    private List<VariantForm> variantForms;
 
     public List<Compound> getCompounds() {
         return compounds;
@@ -85,15 +87,19 @@ public class LexicalEntry {
         this.derivativeOf = derivativeOf;
     }
 
-    @Override
-    public String toString() {
-        return "LexicalEntry{" +
-                "compounds=" + compounds +
-                ", entries=" + entries +
-                ", language='" + language + '\'' +
-                ", text='" + text + '\'' +
-                ", lexicalCategory=" + lexicalCategory +
-                ", phrases=" + phrases +
-                '}';
+    public List<GrammaticalFeature> getGrammaticalFeatures() {
+        return grammaticalFeatures;
+    }
+
+    public void setGrammaticalFeatures(List<GrammaticalFeature> grammaticalFeatures) {
+        this.grammaticalFeatures = grammaticalFeatures;
+    }
+
+    public List<VariantForm> getVariantForms() {
+        return variantForms;
+    }
+
+    public void setVariantForms(List<VariantForm> variantForms) {
+        this.variantForms = variantForms;
     }
 }

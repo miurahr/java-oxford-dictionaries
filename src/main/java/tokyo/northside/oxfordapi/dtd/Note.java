@@ -1,8 +1,17 @@
 package tokyo.northside.oxfordapi.dtd;
 
 public class Note {
+    private String id;
     private String text;
     private String type;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getText() {
         return text;

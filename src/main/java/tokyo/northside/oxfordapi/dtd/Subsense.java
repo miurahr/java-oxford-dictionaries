@@ -13,7 +13,7 @@ public class Subsense {
     private List<Register> registers;
     private List<Region> regions;
     private List<Note> notes;
-    private List<Synonym> synonyms;
+    private List<SynonymAntonym> synonyms;
     private List<ThesaurusLink> thesaurusLinks;
     private List<Construction> constructions;
     private List<CrossReference> crossReferences;
@@ -101,11 +101,11 @@ public class Subsense {
         this.notes = notes;
     }
 
-    public List<Synonym> getSynonyms() {
+    public List<SynonymAntonym> getSynonyms() {
         return synonyms;
     }
 
-    public void setSynonyms(final List<Synonym> synonyms) {
+    public void setSynonyms(final List<SynonymAntonym> synonyms) {
         this.synonyms = synonyms;
     }
 

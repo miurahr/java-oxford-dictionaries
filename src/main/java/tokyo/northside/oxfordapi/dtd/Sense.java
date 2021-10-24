@@ -4,13 +4,14 @@ import java.util.List;
 
 public class Sense {
     private List<String> definitions;
+    private List<SynonymAntonym> antonyms;
     private List<DomainClass> domainClasses;
     private List<Example> examples;
     private String id;
     private List<SemanticClass> semanticClasses;
     private List<String> shortDefinitions;
     private List<Subsense> subsenses;
-    private List<Synonym> synonyms;
+    private List<SynonymAntonym> synonyms;
     private List<ThesaurusLink> thesaurusLinks;
     private List<Translation> translations;
     private List<Register> registers;
@@ -29,6 +30,14 @@ public class Sense {
 
     public void setDefinitions(final List<String> definitions) {
         this.definitions = definitions;
+    }
+
+    public List<SynonymAntonym> getAntonyms() {
+        return antonyms;
+    }
+
+    public void setAntonyms(final List<SynonymAntonym> antonyms) {
+        this.antonyms = antonyms;
     }
 
     public List<DomainClass> getDomainClasses() {
@@ -79,11 +88,11 @@ public class Sense {
         this.subsenses = subsenses;
     }
 
-    public List<Synonym> getSynonyms() {
+    public List<SynonymAntonym> getSynonyms() {
         return synonyms;
     }
 
-    public void setSynonyms(final List<Synonym> synonyms) {
+    public void setSynonyms(final List<SynonymAntonym> synonyms) {
         this.synonyms = synonyms;
     }
 
