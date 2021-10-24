@@ -14,11 +14,18 @@ plugins {
 }
 
 // calculate version string from git tag, hash and commit distance
-fun getVersionDetails(): com.palantir.gradle.gitversion.VersionDetails = (extra["versionDetails"] as groovy.lang.Closure<*>)() as com.palantir.gradle.gitversion.VersionDetails
+fun getVersionDetails(): com.palantir.gradle.gitversion.VersionDetails =
+    (extra["versionDetails"] as groovy.lang.Closure<*>)() as com.palantir.gradle.gitversion.VersionDetails
 if (getVersionDetails().isCleanTag) {
     version = getVersionDetails().lastTag.substring(1)
 } else {
-    version = getVersionDetails().lastTag.substring(1) + "-" + getVersionDetails().commitDistance + "-" + getVersionDetails().gitHash + "-SNAPSHOT"
+    version =
+        String.format(
+            "%s-%s-%s-SNAPSHOT",
+            getVersionDetails().lastTag.substring(1),
+            getVersionDetails().commitDistance,
+            getVersionDetails().gitHash
+        )
 }
 
 group = "tokyo.northside"
