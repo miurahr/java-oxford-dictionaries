@@ -14,7 +14,7 @@ public class PhrasalVerb {
         return domains;
     }
 
-    public void setDomains(List<Domain> domains) {
+    public void setDomains(final List<Domain> domains) {
         this.domains = domains;
     }
 
@@ -22,7 +22,7 @@ public class PhrasalVerb {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(final String id) {
         this.id = id;
     }
 
@@ -30,7 +30,7 @@ public class PhrasalVerb {
         return language;
     }
 
-    public void setLanguage(String language) {
+    public void setLanguage(final String language) {
         this.language = language;
     }
 
@@ -38,7 +38,7 @@ public class PhrasalVerb {
         return regions;
     }
 
-    public void setRegions(List<Region> regions) {
+    public void setRegions(final List<Region> regions) {
         this.regions = regions;
     }
 
@@ -46,7 +46,7 @@ public class PhrasalVerb {
         return registers;
     }
 
-    public void setRegisters(List<Register> registers) {
+    public void setRegisters(final List<Register> registers) {
         this.registers = registers;
     }
 
@@ -54,7 +54,7 @@ public class PhrasalVerb {
         return text;
     }
 
-    public void setText(String text) {
+    public void setText(final String text) {
         this.text = text;
     }
 

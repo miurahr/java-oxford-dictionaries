@@ -19,7 +19,7 @@ public class Entry {
         return etymologies;
     }
 
-    public void setEtymologies(List<String> etymologies) {
+    public void setEtymologies(final List<String> etymologies) {
         this.etymologies = etymologies;
     }
 
@@ -27,7 +27,7 @@ public class Entry {
         return homographNumber;
     }
 
-    public void setHomographNumber(String homographNumber) {
+    public void setHomographNumber(final String homographNumber) {
         this.homographNumber = homographNumber;
     }
 
@@ -35,7 +35,7 @@ public class Entry {
         return pronunciations;
     }
 
-    public void setPronunciations(List<Pronunciation> pronunciations) {
+    public void setPronunciations(final List<Pronunciation> pronunciations) {
         this.pronunciations = pronunciations;
     }
 
@@ -43,7 +43,7 @@ public class Entry {
         return senses;
     }
 
-    public void setSenses(List<Sense> senses) {
+    public void setSenses(final List<Sense> senses) {
         this.senses = senses;
     }
 
@@ -51,7 +51,7 @@ public class Entry {
         return grammaticalFeatures;
     }
 
-    public void setGrammaticalFeatures(List<GrammaticalFeature> grammaticalFeatures) {
+    public void setGrammaticalFeatures(final List<GrammaticalFeature> grammaticalFeatures) {
         this.grammaticalFeatures = grammaticalFeatures;
     }
 
@@ -59,7 +59,7 @@ public class Entry {
         return inflections;
     }
 
-    public void setInflections(List<Inflection> inflections) {
+    public void setInflections(final List<Inflection> inflections) {
         this.inflections = inflections;
     }
 
@@ -67,7 +67,7 @@ public class Entry {
         return crossReferences;
     }
 
-    public void setCrossReferences(List<CrossReference> crossReferences) {
+    public void setCrossReferences(final List<CrossReference> crossReferences) {
         this.crossReferences = crossReferences;
     }
 
@@ -75,7 +75,7 @@ public class Entry {
         return crossReferenceMarkers;
     }
 
-    public void setCrossReferenceMarkers(List<String> crossReferenceMarkers) {
+    public void setCrossReferenceMarkers(final List<String> crossReferenceMarkers) {
         this.crossReferenceMarkers = crossReferenceMarkers;
     }
 
@@ -83,7 +83,7 @@ public class Entry {
         return notes;
     }
 
-    public void setNotes(List<Note> notes) {
+    public void setNotes(final List<Note> notes) {
         this.notes = notes;
     }
 
@@ -107,7 +107,7 @@ public class Entry {
                 '}';
     }
 
-    public void setVariantForms(List<VariantForm> variantForms) {
+    public void setVariantForms(final List<VariantForm> variantForms) {
         this.variantForms = variantForms;
     }
 }

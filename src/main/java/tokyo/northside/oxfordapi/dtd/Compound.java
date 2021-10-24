@@ -9,7 +9,7 @@ public class Compound {
         return domains;
     }
 
-    public void setDomains(List<Domain> domains) {
+    public void setDomains(final List<Domain> domains) {
         this.domains = domains;
     }
 

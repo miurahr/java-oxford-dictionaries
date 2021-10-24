@@ -25,7 +25,7 @@ public class LexicalEntry {
         return entries;
     }
 
-    public void setEntries(List<Entry> entries) {
+    public void setEntries(final List<Entry> entries) {
         this.entries = entries;
     }
 
@@ -33,7 +33,7 @@ public class LexicalEntry {
         return language;
     }
 
-    public void setLanguage(String language) {
+    public void setLanguage(final String language) {
         this.language = language;
     }
 
@@ -41,7 +41,7 @@ public class LexicalEntry {
         return text;
     }
 
-    public void setText(String text) {
+    public void setText(final String text) {
         this.text = text;
     }
 
@@ -49,7 +49,7 @@ public class LexicalEntry {
         return lexicalCategory;
     }
 
-    public void setLexicalCategory(LexicalCategory lexicalCategory) {
+    public void setLexicalCategory(final LexicalCategory lexicalCategory) {
         this.lexicalCategory = lexicalCategory;
     }
 
@@ -57,7 +57,7 @@ public class LexicalEntry {
         return phrases;
     }
 
-    public void setPhrases(List<Phrase> phrases) {
+    public void setPhrases(final List<Phrase> phrases) {
         this.phrases = phrases;
     }
 
@@ -65,7 +65,7 @@ public class LexicalEntry {
         return derivatives;
     }
 
-    public void setDerivatives(List<Derivative> derivatives) {
+    public void setDerivatives(final List<Derivative> derivatives) {
         this.derivatives = derivatives;
     }
 
@@ -73,7 +73,7 @@ public class LexicalEntry {
         return phrasalVerbs;
     }
 
-    public void setPhrasalVerbs(List<PhrasalVerb> phrasalVerbs) {
+    public void setPhrasalVerbs(final List<PhrasalVerb> phrasalVerbs) {
         this.phrasalVerbs = phrasalVerbs;
     }
 
@@ -81,7 +81,7 @@ public class LexicalEntry {
         return derivativeOf;
     }
 
-    public void setDerivativeOf(List<DerivativeOf> derivativeOf) {
+    public void setDerivativeOf(final List<DerivativeOf> derivativeOf) {
         this.derivativeOf = derivativeOf;
     }
 

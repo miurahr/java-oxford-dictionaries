@@ -16,7 +16,7 @@ public class Example {
         return registers;
     }
 
-    public void setRegisters(List<Register> registers) {
+    public void setRegisters(final List<Register> registers) {
         this.registers = registers;
     }
 
@@ -24,7 +24,7 @@ public class Example {
         return text;
     }
 
-    public void setText(String text) {
+    public void setText(final String text) {
         this.text = text;
     }
 
@@ -32,7 +32,7 @@ public class Example {
         return notes;
     }
 
-    public void setNotes(List<Note> notes) {
+    public void setNotes(final List<Note> notes) {
         this.notes = notes;
     }
 
@@ -40,7 +40,7 @@ public class Example {
         return senseIds;
     }
 
-    public void setSenseIds(List<String> senseIds) {
+    public void setSenseIds(final List<String> senseIds) {
         this.senseIds = senseIds;
     }
 
@@ -48,7 +48,7 @@ public class Example {
         return translations;
     }
 
-    public void setTranslations(List<Translation> translations) {
+    public void setTranslations(final List<Translation> translations) {
         this.translations = translations;
     }
 
@@ -56,7 +56,7 @@ public class Example {
         return regions;
     }
 
-    public void setRegions(List<Region> regions) {
+    public void setRegions(final List<Region> regions) {
         this.regions = regions;
     }
 
@@ -64,13 +64,13 @@ public class Example {
         return domains;
     }
 
-    public void setDomains(List<Domain> domains) {
+    public void setDomains(final List<Domain> domains) {
         this.domains = domains;
     }
 
     @Override
     public String toString() {
-        return "Example{" + "registers=" + registers + ", text='" + text + '\'' + ", notes=" + notes
-                + ", senseIds=" + senseIds + ", translations=" + translations + ", domains=" + domains +  '}';
+        return "Example{" + "registers=" + registers + ", text='" + text + '\'' + ", notes=" + notes +
+                ", senseIds=" + senseIds + ", translations=" + translations + ", domains=" + domains +  '}';
     }
 }

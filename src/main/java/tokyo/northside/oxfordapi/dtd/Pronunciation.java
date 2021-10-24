@@ -12,7 +12,7 @@ public class Pronunciation {
         return dialects;
     }
 
-    public void setDialects(List<String> dialects) {
+    public void setDialects(final List<String> dialects) {
         this.dialects = dialects;
     }
 
@@ -20,7 +20,7 @@ public class Pronunciation {
         return phoneticNotation;
     }
 
-    public void setPhoneticNotation(String phoneticNotation) {
+    public void setPhoneticNotation(final String phoneticNotation) {
         this.phoneticNotation = phoneticNotation;
     }
 
@@ -28,7 +28,7 @@ public class Pronunciation {
         return phoneticSpelling;
     }
 
-    public void setPhoneticSpelling(String phoneticSpelling) {
+    public void setPhoneticSpelling(final String phoneticSpelling) {
         this.phoneticSpelling = phoneticSpelling;
     }
 
@@ -36,13 +36,13 @@ public class Pronunciation {
         return audioFile;
     }
 
-    public void setAudioFile(String audioFile) {
+    public void setAudioFile(final String audioFile) {
         this.audioFile = audioFile;
     }
 
     @Override
     public String toString() {
-        return "Pronounciation{" + "dialects=" + dialects + ", phoneticNotation='" + phoneticNotation + '\''
-               + ", phoneticSpelling='" + phoneticSpelling + '\'' + ", audioFIle='" + audioFile + '\'' + '}';
+        return "Pronounciation{" + "dialects=" + dialects + ", phoneticNotation='" + phoneticNotation + '\'' +
+               ", phoneticSpelling='" + phoneticSpelling + '\'' + ", audioFIle='" + audioFile + '\'' + '}';
     }
 }

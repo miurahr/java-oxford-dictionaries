@@ -10,7 +10,7 @@ public class VariantForm {
         return pronunciations;
     }
 
-    public void setPronunciations(List<Pronunciation> pronunciations) {
+    public void setPronunciations(final List<Pronunciation> pronunciations) {
         this.pronunciations = pronunciations;
     }
 
@@ -18,7 +18,7 @@ public class VariantForm {
         return text;
     }
 
-    public void setText(String text) {
+    public void setText(final String text) {
         this.text = text;
     }
 

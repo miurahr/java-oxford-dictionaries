@@ -13,7 +13,7 @@ public class DerivativeOf {
         return domains;
     }
 
-    public void setDomains(List<Domain> domains) {
+    public void setDomains(final List<Domain> domains) {
         this.domains = domains;
     }
 
@@ -21,7 +21,7 @@ public class DerivativeOf {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(final String id) {
         this.id = id;
     }
 
@@ -29,7 +29,7 @@ public class DerivativeOf {
         return language;
     }
 
-    public void setLanguage(String language) {
+    public void setLanguage(final String language) {
         this.language = language;
     }
 
@@ -37,7 +37,7 @@ public class DerivativeOf {
         return regions;
     }
 
-    public void setRegions(List<Region> regions) {
+    public void setRegions(final List<Region> regions) {
         this.regions = regions;
     }
 
@@ -45,7 +45,7 @@ public class DerivativeOf {
         return text;
     }
 
-    public void setText(String text) {
+    public void setText(final String text) {
         this.text = text;
     }
 

@@ -8,7 +8,7 @@ public class ThesaurusLink {
         return entry_id;
     }
 
-    public void setEntry_id(String entry_id) {
+    public void setEntry_id(final String entry_id) {
         this.entry_id = entry_id;
     }
 
@@ -16,7 +16,7 @@ public class ThesaurusLink {
         return sense_id;
     }
 
-    public void setSense_id(String sense_id) {
+    public void setSense_id(final String sense_id) {
         this.sense_id = sense_id;
     }
 

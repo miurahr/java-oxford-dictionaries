@@ -27,7 +27,7 @@ public class Sense {
         return definitions;
     }
 
-    public void setDefinitions(List<String> definitions) {
+    public void setDefinitions(final List<String> definitions) {
         this.definitions = definitions;
     }
 
@@ -35,7 +35,7 @@ public class Sense {
         return domainClasses;
     }
 
-    public void setDomainClasses(List<DomainClass> domainClasses) {
+    public void setDomainClasses(final List<DomainClass> domainClasses) {
         this.domainClasses = domainClasses;
     }
 
@@ -43,7 +43,7 @@ public class Sense {
         return examples;
     }
 
-    public void setExamples(List<Example> examples) {
+    public void setExamples(final List<Example> examples) {
         this.examples = examples;
     }
 
@@ -51,7 +51,7 @@ public class Sense {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(final String id) {
         this.id = id;
     }
 
@@ -59,7 +59,7 @@ public class Sense {
         return semanticClasses;
     }
 
-    public void setSemanticClasses(List<SemanticClass> semanticClasses) {
+    public void setSemanticClasses(final List<SemanticClass> semanticClasses) {
         this.semanticClasses = semanticClasses;
     }
 
@@ -67,7 +67,7 @@ public class Sense {
         return shortDefinitions;
     }
 
-    public void setShortDefinitions(List<String> shortDefinitions) {
+    public void setShortDefinitions(final List<String> shortDefinitions) {
         this.shortDefinitions = shortDefinitions;
     }
 
@@ -75,7 +75,7 @@ public class Sense {
         return subsenses;
     }
 
-    public void setSubsenses(List<Subsense> subsenses) {
+    public void setSubsenses(final List<Subsense> subsenses) {
         this.subsenses = subsenses;
     }
 
@@ -83,7 +83,7 @@ public class Sense {
         return synonyms;
     }
 
-    public void setSynonyms(List<Synonym> synonyms) {
+    public void setSynonyms(final List<Synonym> synonyms) {
         this.synonyms = synonyms;
     }
 
@@ -91,7 +91,7 @@ public class Sense {
         return thesaurusLinks;
     }
 
-    public void setThesaurusLinks(List<ThesaurusLink> thesaurusLinks) {
+    public void setThesaurusLinks(final List<ThesaurusLink> thesaurusLinks) {
         this.thesaurusLinks = thesaurusLinks;
     }
 
@@ -99,7 +99,7 @@ public class Sense {
         return registers;
     }
 
-    public void setRegisters(List<Register> registers) {
+    public void setRegisters(final List<Register> registers) {
         this.registers = registers;
     }
 
@@ -107,7 +107,7 @@ public class Sense {
         return regions;
     }
 
-    public void setRegions(List<Region> regions) {
+    public void setRegions(final List<Region> regions) {
         this.regions = regions;
     }
 
@@ -115,7 +115,7 @@ public class Sense {
         return crossReferenceMarkers;
     }
 
-    public void setCrossReferenceMarkers(List<String> crossReferenceMarkers) {
+    public void setCrossReferenceMarkers(final List<String> crossReferenceMarkers) {
         this.crossReferenceMarkers = crossReferenceMarkers;
     }
 
@@ -123,7 +123,7 @@ public class Sense {
         return crossReferences;
     }
 
-    public void setCrossReferences(List<CrossReference> crossReferences) {
+    public void setCrossReferences(final List<CrossReference> crossReferences) {
         this.crossReferences = crossReferences;
     }
 
@@ -131,7 +131,7 @@ public class Sense {
         return inflections;
     }
 
-    public void setInflections(List<Inflection> inflections) {
+    public void setInflections(final List<Inflection> inflections) {
         this.inflections = inflections;
     }
 
@@ -139,7 +139,7 @@ public class Sense {
         return constructions;
     }
 
-    public void setConstructions(List<Construction> constructions) {
+    public void setConstructions(final List<Construction> constructions) {
         this.constructions = constructions;
     }
 
@@ -147,7 +147,7 @@ public class Sense {
         return domains;
     }
 
-    public void setDomains(List<Domain> domains) {
+    public void setDomains(final List<Domain> domains) {
         this.domains = domains;
     }
 
@@ -155,7 +155,7 @@ public class Sense {
         return notes;
     }
 
-    public void setNotes(List<Note> notes) {
+    public void setNotes(final List<Note> notes) {
         this.notes = notes;
     }
 
@@ -163,7 +163,7 @@ public class Sense {
         return translations;
     }
 
-    public void setTranslations(List<Translation> translations) {
+    public void setTranslations(final List<Translation> translations) {
         this.translations = translations;
     }
 
@@ -171,7 +171,7 @@ public class Sense {
         return variantForms;
     }
 
-    public void setVariantForms(List<VariantForm> variantForms) {
+    public void setVariantForms(final List<VariantForm> variantForms) {
         this.variantForms = variantForms;
     }
 

@@ -25,7 +25,7 @@ public class Subsense {
         return definitions;
     }
 
-    public void setDefinitions(List<String> definitions) {
+    public void setDefinitions(final List<String> definitions) {
         this.definitions = definitions;
     }
 
@@ -33,7 +33,7 @@ public class Subsense {
         return domainClasses;
     }
 
-    public void setDomainClasses(List<DomainClass> domainClasses) {
+    public void setDomainClasses(final List<DomainClass> domainClasses) {
         this.domainClasses = domainClasses;
     }
 
@@ -41,7 +41,7 @@ public class Subsense {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(final String id) {
         this.id = id;
     }
 
@@ -49,7 +49,7 @@ public class Subsense {
         return semanticClasses;
     }
 
-    public void setSemanticClasses(List<SemanticClass> semanticClasses) {
+    public void setSemanticClasses(final List<SemanticClass> semanticClasses) {
         this.semanticClasses = semanticClasses;
     }
 
@@ -57,7 +57,7 @@ public class Subsense {
         return shortDefinitions;
     }
 
-    public void setShortDefinitions(List<String> shortDefinitions) {
+    public void setShortDefinitions(final List<String> shortDefinitions) {
         this.shortDefinitions = shortDefinitions;
     }
 
@@ -65,7 +65,7 @@ public class Subsense {
         return domains;
     }
 
-    public void setDomains(List<Domain> domains) {
+    public void setDomains(final List<Domain> domains) {
         this.domains = domains;
     }
 
@@ -73,7 +73,7 @@ public class Subsense {
         return examples;
     }
 
-    public void setExamples(List<Example> examples) {
+    public void setExamples(final List<Example> examples) {
         this.examples = examples;
     }
 
@@ -81,7 +81,7 @@ public class Subsense {
         return registers;
     }
 
-    public void setRegisters(List<Register> registers) {
+    public void setRegisters(final List<Register> registers) {
         this.registers = registers;
     }
 
@@ -89,7 +89,7 @@ public class Subsense {
         return regions;
     }
 
-    public void setRegions(List<Region> regions) {
+    public void setRegions(final List<Region> regions) {
         this.regions = regions;
     }
 
@@ -97,7 +97,7 @@ public class Subsense {
         return notes;
     }
 
-    public void setNotes(List<Note> notes) {
+    public void setNotes(final List<Note> notes) {
         this.notes = notes;
     }
 
@@ -105,7 +105,7 @@ public class Subsense {
         return synonyms;
     }
 
-    public void setSynonyms(List<Synonym> synonyms) {
+    public void setSynonyms(final List<Synonym> synonyms) {
         this.synonyms = synonyms;
     }
 
@@ -113,7 +113,7 @@ public class Subsense {
         return thesaurusLinks;
     }
 
-    public void setThesaurusLinks(List<ThesaurusLink> thesaurusLinks) {
+    public void setThesaurusLinks(final List<ThesaurusLink> thesaurusLinks) {
         this.thesaurusLinks = thesaurusLinks;
     }
 
@@ -121,7 +121,7 @@ public class Subsense {
         return constructions;
     }
 
-    public void setConstructions(List<Construction> constructions) {
+    public void setConstructions(final List<Construction> constructions) {
         this.constructions = constructions;
     }
 
@@ -129,7 +129,7 @@ public class Subsense {
         return crossReferenceMarkers;
     }
 
-    public void setCrossReferenceMarkers(List<String> crossReferenceMarkers) {
+    public void setCrossReferenceMarkers(final List<String> crossReferenceMarkers) {
         this.crossReferenceMarkers = crossReferenceMarkers;
     }
 
@@ -137,7 +137,7 @@ public class Subsense {
         return crossReferences;
     }
 
-    public void setCrossReferences(List<CrossReference> crossReferences) {
+    public void setCrossReferences(final List<CrossReference> crossReferences) {
         this.crossReferences = crossReferences;
     }
 
@@ -145,7 +145,7 @@ public class Subsense {
         return variantForms;
     }
 
-    public void setVariantForms(List<VariantForm> variantForms) {
+    public void setVariantForms(final List<VariantForm> variantForms) {
         this.variantForms = variantForms;
     }
 
@@ -153,7 +153,7 @@ public class Subsense {
         return translations;
     }
 
-    public void setTranslations(List<Translation> translations) {
+    public void setTranslations(final List<Translation> translations) {
         this.translations = translations;
     }
 

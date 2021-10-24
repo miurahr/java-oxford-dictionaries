@@ -9,7 +9,7 @@ public class GrammaticalFeature {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(final String id) {
         this.id = id;
     }
 
@@ -17,7 +17,7 @@ public class GrammaticalFeature {
         return text;
     }
 
-    public void setText(String text) {
+    public void setText(final String text) {
         this.text = text;
     }
 
@@ -25,7 +25,7 @@ public class GrammaticalFeature {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(final String type) {
         this.type = type;
     }
 

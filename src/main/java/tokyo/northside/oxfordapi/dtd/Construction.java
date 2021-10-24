@@ -10,7 +10,7 @@ public class Construction {
         return text;
     }
 
-    public void setText(String text) {
+    public void setText(final String text) {
         this.text = text;
     }
 
@@ -18,7 +18,7 @@ public class Construction {
         return examples;
     }
 
-    public void setExamples(List<Example> examples) {
+    public void setExamples(final List<Example> examples) {
         this.examples = examples;
     }
 

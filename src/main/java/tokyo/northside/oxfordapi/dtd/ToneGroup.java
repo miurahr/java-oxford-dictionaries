@@ -9,7 +9,7 @@ public class ToneGroup {
         return tones;
     }
 
-    public void setTones(List<Tone> tones) {
+    public void setTones(final List<Tone> tones) {
         this.tones = tones;
     }
 

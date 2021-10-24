@@ -8,7 +8,7 @@ public class LexicalCategory {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(final String id) {
         this.id = id;
     }
 
@@ -16,7 +16,7 @@ public class LexicalCategory {
         return text;
     }
 
-    public void setText(String text) {
+    public void setText(final String text) {
         this.text = text;
     }
 

@@ -37,7 +37,7 @@ public class Result {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(final String type) {
         this.type = type;
     }
 
@@ -45,13 +45,13 @@ public class Result {
         return word;
     }
 
-    public void setWord(String word) {
+    public void setWord(final String word) {
         this.word = word;
     }
 
     @Override
     public String toString() {
-        return "Results{" + "id='" + id + '\'' + ", language='" + language + '\''
-                + ", lexicalEntries=" + lexicalEntries + ", type='" + type + '\'' + ", word='" + word + '\'' + '}';
+        return "Results{" + "id='" + id + '\'' + ", language='" + language + '\'' +
+                ", lexicalEntries=" + lexicalEntries + ", type='" + type + '\'' + ", word='" + word + '\'' + '}';
     }
 }

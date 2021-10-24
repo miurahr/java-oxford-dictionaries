@@ -10,15 +10,15 @@ public class Translation {
     private List<Domain> domains;
     private List<GrammaticalFeature> grammaticalFeatures;
     private List<Note> notes;
-    private List <Region> regions;
-    private List <Register> registers;
+    private List<Region> regions;
+    private List<Register> registers;
     private List<ToneGroup> toneGroups;
 
     public List<Collocation> getCollocations() {
         return collocations;
     }
 
-    public void setCollocations(List<Collocation> collocations) {
+    public void setCollocations(final List<Collocation> collocations) {
         this.collocations = collocations;
     }
 
@@ -26,7 +26,7 @@ public class Translation {
         return domains;
     }
 
-    public void setDomains(List<Domain> domains) {
+    public void setDomains(final List<Domain> domains) {
         this.domains = domains;
     }
 
@@ -34,7 +34,7 @@ public class Translation {
         return grammaticalFeatures;
     }
 
-    public void setGrammaticalFeatures(List<GrammaticalFeature> grammaticalFeatures) {
+    public void setGrammaticalFeatures(final List<GrammaticalFeature> grammaticalFeatures) {
         this.grammaticalFeatures = grammaticalFeatures;
     }
 
@@ -42,7 +42,7 @@ public class Translation {
         return language;
     }
 
-    public void setLanguage(String language) {
+    public void setLanguage(final String language) {
         this.language = language;
     }
 
@@ -50,7 +50,7 @@ public class Translation {
         return notes;
     }
 
-    public void setNotes(List<Note> notes) {
+    public void setNotes(final List<Note> notes) {
         this.notes = notes;
     }
 
@@ -58,7 +58,7 @@ public class Translation {
         return regions;
     }
 
-    public void setRegions(List<Region> regions) {
+    public void setRegions(final List<Region> regions) {
         this.regions = regions;
     }
 
@@ -66,7 +66,7 @@ public class Translation {
         return registers;
     }
 
-    public void setRegisters(List<Register> registers) {
+    public void setRegisters(final List<Register> registers) {
         this.registers = registers;
     }
 
@@ -74,7 +74,7 @@ public class Translation {
         return text;
     }
 
-    public void setText(String text) {
+    public void setText(final String text) {
         this.text = text;
     }
 
@@ -82,7 +82,7 @@ public class Translation {
         return toneGroups;
     }
 
-    public void setToneGroups(List<ToneGroup> toneGroups) {
+    public void setToneGroups(final List<ToneGroup> toneGroups) {
         this.toneGroups = toneGroups;
     }
 
@@ -90,7 +90,7 @@ public class Translation {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(final String type) {
         this.type = type;
     }
 

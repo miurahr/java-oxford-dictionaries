@@ -15,7 +15,7 @@ public class Inflection {
         return domains;
     }
 
-    public void setDomains(List<Domain> domains) {
+    public void setDomains(final List<Domain> domains) {
         this.domains = domains;
     }
 
@@ -23,7 +23,7 @@ public class Inflection {
         return grammaticalFeatures;
     }
 
-    public void setGrammaticalFeatures(List<GrammaticalFeature> grammaticalFeatures) {
+    public void setGrammaticalFeatures(final List<GrammaticalFeature> grammaticalFeatures) {
         this.grammaticalFeatures = grammaticalFeatures;
     }
 
@@ -31,7 +31,7 @@ public class Inflection {
         return lexicalCategory;
     }
 
-    public void setLexicalCategory(LexicalCategory lexicalCategory) {
+    public void setLexicalCategory(final LexicalCategory lexicalCategory) {
         this.lexicalCategory = lexicalCategory;
     }
 
@@ -39,7 +39,7 @@ public class Inflection {
         return pronunciations;
     }
 
-    public void setPronunciations(List<Pronunciation> pronunciations) {
+    public void setPronunciations(final List<Pronunciation> pronunciations) {
         this.pronunciations = pronunciations;
     }
 
@@ -47,7 +47,7 @@ public class Inflection {
         return regions;
     }
 
-    public void setRegions(List<Region> regions) {
+    public void setRegions(final List<Region> regions) {
         this.regions = regions;
     }
 
@@ -55,7 +55,7 @@ public class Inflection {
         return registers;
     }
 
-    public void setRegisters(List<Register> registers) {
+    public void setRegisters(final List<Register> registers) {
         this.registers = registers;
     }
 
@@ -63,7 +63,7 @@ public class Inflection {
         return inflectedForm;
     }
 
-    public void setInflectedForm(String inflectedForm) {
+    public void setInflectedForm(final String inflectedForm) {
         this.inflectedForm = inflectedForm;
     }
 
