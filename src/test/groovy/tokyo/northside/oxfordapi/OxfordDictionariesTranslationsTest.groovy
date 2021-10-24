@@ -36,4 +36,16 @@ class OxfordDictionariesTranslationsTest {
         assertEquals("as", translations.get(0).getText())
     }
 
+    @Test
+    void testTranslationsParseModel() {
+        InputStream resource = OxfordClient.class.getClassLoader()
+                .getResourceAsStream("oxfordapi/models/translation_model.json")
+        String json = IOUtils.toString(resource, "UTF-8")
+        ObjectMapper mapper = new ObjectMapper()
+        JsonNode node = mapper.readTree(json)
+        node = node.get("results")
+        def results = mapper.readValue(node.traverse(), new TypeReference<List<Result>>() {})
+        Result result = results.get(0)
+        assertEquals("string", result.getId())
+    }
 }
