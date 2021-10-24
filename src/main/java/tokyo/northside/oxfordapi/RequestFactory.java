@@ -1,8 +1,5 @@
 package tokyo.northside.oxfordapi;
 
-import org.apache.hc.core5.http.Header;
-import org.apache.hc.core5.http.HttpHeaders;
-
 import java.util.HashMap;
 import java.util.Map;
 
