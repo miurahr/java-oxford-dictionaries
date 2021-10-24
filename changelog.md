@@ -3,6 +3,14 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [v0.2.0]
+* Update javadoc
+* Introduce RequestFactory class
+* Move exception class
+* Add thesaurus parser test case
+* Update entries parser
+* Update translations parser
+
 ## [v0.1.1]
 * Bump Gradle@7.2
 
