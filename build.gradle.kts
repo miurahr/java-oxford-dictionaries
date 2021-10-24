@@ -19,9 +19,7 @@ fun getVersionDetails(): com.palantir.gradle.gitversion.VersionDetails =
 if (getVersionDetails().isCleanTag) {
     version = getVersionDetails().lastTag.substring(1)
 } else {
-    version =
-        String.format(
-            "%s-%s-%s-SNAPSHOT",
+    version = "%s-%s-%s-SNAPSHOT".format(
             getVersionDetails().lastTag.substring(1),
             getVersionDetails().commitDistance,
             getVersionDetails().gitHash
