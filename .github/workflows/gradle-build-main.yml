@@ -15,7 +15,7 @@ jobs:
       with:
         distribution: 'adopt'
         java-version: '8'
-    - uses: eskatos/gradle-command-action@v2
-      name: gradle check
+    - uses: burrunan/gradle-cache-action@v1
       with:
-        arguments: check
+        gradle-version: wrapper
+        arguments: check printVersion
