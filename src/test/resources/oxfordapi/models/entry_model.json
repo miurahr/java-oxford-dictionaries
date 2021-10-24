@@ -224,11 +224,6 @@
                           "text": "string"
                         }
                       ],
-                      "examples": [
-                        [
-                          "string"
-                        ]
-                      ],
                       "notes": [
                         {
                           "id": "string",
