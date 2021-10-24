@@ -55,21 +55,6 @@ public final class OxfordClient {
     }
 
     /**
-     * Exception class for the OD API client.
-     */
-    public static class OxfordClientException extends Exception {
-        /**
-         * Constructs a new exception with the specified detail message.
-         *
-         * @param message the detail message. The detail message is saved for
-         *                later retrieval by the {@link #getMessage()} method.
-         */
-        public OxfordClientException(final String message) {
-            super(message);
-        }
-    }
-
-    /**
      * Get result of `translations` endpoint query.
      *
      * @param word query word
@@ -80,7 +65,7 @@ public final class OxfordClient {
      */
     public List<Result> getTranslations(final String word, final String source, final String target)
             throws OxfordClientException {
-        RequestFactory f = new RequestFactory(endpointUrl, appId, appKey);
+        RequestFactory f = new RequestFactory(appId, appKey, endpointUrl);
         f.setType(RequestFactory.QueryType.TRANSLATIONS);
         f.setSourceLanguage(source);
         f.setTargetLanguage(target);
@@ -99,7 +84,7 @@ public final class OxfordClient {
      */
     public List<Result> getEntries(final String word, final String language, final boolean strict)
             throws OxfordClientException {
-        RequestFactory f = new RequestFactory(endpointUrl, appId, appKey);
+        RequestFactory f = new RequestFactory(appId, appKey, endpointUrl);
         f.setType(RequestFactory.QueryType.ENTRIES);
         f.setLanguage(language);
         f.setQueryWord(word);

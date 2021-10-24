@@ -22,10 +22,12 @@ public class RequestFactory {
     private String targetLang;
     private String strictMatch;
 
-    public RequestFactory(final String endpointUrl, final String appId, final String appKey) {
+    public RequestFactory(final String appId, final String appKey, final String endpointUrl) {
         this.endpointUrl = endpointUrl;
         this.appId = appId;
         this.appKey = appKey;
+        strictMatch = "false";
+        sourceLang = "en-gb";
         type = QueryType.ENTRIES;
     }
 
@@ -82,11 +84,17 @@ public class RequestFactory {
         return header;
     }
 
-    public String getUrl() {
+    public String getUrl() throws OxfordClientException {
+        if (queryWord == null) {
+            throw new OxfordClientException("Query word is mandatory");
+        }
         switch (type) {
             case ENTRIES:
                 return String.format("%sentries/%s/%s?strictMatch=%s", endpointUrl, sourceLang, queryWord, strictMatch);
             case TRANSLATIONS:
+                if (targetLang == null) {
+                    throw new OxfordClientException("Source and Target languages are mandatory");
+                }
                 return String.format("%stranslations/%s/%s?q=%s", endpointUrl, sourceLang, targetLang, queryWord);
             default:
                 return null;
