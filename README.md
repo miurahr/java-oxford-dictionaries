@@ -173,3 +173,20 @@ class Main {
 
 </p>
 </details>
+
+3. generic query programming interface.
+
+<details><p>
+
+```java
+class Main {
+    public static void main() {
+        OxfordClient oxfordClient = new OxfordClient(appId, appKey, baseUrl);
+        RequestFactory f = new RequestFactory(appId, appKey, baseUrl);
+        f.setQueryWord("ace");
+        List<Result> results = oxfordClient.query(f.getURL(), f.getHeader());
+    }
+}
+```
+
+</p></details>
