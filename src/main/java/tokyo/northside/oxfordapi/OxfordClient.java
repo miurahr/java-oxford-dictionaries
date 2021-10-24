@@ -33,11 +33,13 @@ public final class OxfordClient {
         endpointUrl = baseUrl;
     }
 
-    public List<Result> getTranslations(final String word, String source, String target) throws OxfordClientException {
+    public List<Result> getTranslations(final String word, final String source, final String target)
+            throws OxfordClientException {
         return query(getTranslationsRequestUrl(word, source, target));
     }
 
-    public List<Result> getEntries(final String word, final String language, final boolean strict) throws OxfordClientException {
+    public List<Result> getEntries(final String word, final String language, final boolean strict)
+            throws OxfordClientException {
         return query(getEntriesRequestUrl(word, language, strict));
     }
 
@@ -47,7 +49,7 @@ public final class OxfordClient {
         try (CloseableHttpClient httpclient = HttpClients.createDefault()) {
             HttpGet httpGet = new HttpGet(requestUrl);
             header.forEach(httpGet::addHeader);
-            response = httpclient.execute(httpGet, responseHandler);
+            response = httpclient.execute(httpGet, RESPONSE_HANDLER);
         } catch (IOException e) {
             throw new OxfordClientException(e.getMessage());
         }
@@ -56,7 +58,7 @@ public final class OxfordClient {
                 ObjectMapper mapper = new ObjectMapper();
                 JsonNode node = mapper.readTree(response);
                 node = node.get("results");
-                return mapper.readValue(node.traverse(), new TypeReference<List<Result>>() {});
+                return mapper.readValue(node.traverse(), new TypeReference<List<Result>>() { });
             } catch (IOException e) {
                 throw new OxfordClientException(e.getMessage());
             }
@@ -115,12 +117,12 @@ public final class OxfordClient {
          * @param message the detail message. The detail message is saved for
          *                later retrieval by the {@link #getMessage()} method.
          */
-        public OxfordClientException(String message) {
+        public OxfordClientException(final String message) {
             super(message);
         }
     }
 
-    static final HttpClientResponseHandler<String> responseHandler = response -> {
+    static final HttpClientResponseHandler<String> RESPONSE_HANDLER = response -> {
         final int status = response.getCode();
         if (status >= HttpStatus.SC_SUCCESS && status < HttpStatus.SC_REDIRECTION) {
             try (HttpEntity entity = response.getEntity()) {
