@@ -42,7 +42,7 @@ dependencies {
     implementation("com.fasterxml.jackson.core:jackson-core:2.13.0")
     implementation("com.fasterxml.jackson.core:jackson-databind:2.13.0")
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.13.0")
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.1")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
     testImplementation("org.junit.jupiter:junit-jupiter-engine:5.8.1")
     testImplementation("org.codehaus.groovy:groovy-all:3.0.9")
     testImplementation("commons-io:commons-io:2.11.0")
