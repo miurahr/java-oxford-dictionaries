@@ -15,16 +15,14 @@ import org.apache.hc.core5.http.io.entity.EntityUtils;
 import tokyo.northside.oxfordapi.dtd.Result;
 
 import java.io.IOException;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Oxford dictionaries API access client.
  *
  * @author Hiroshi Miura
  */
-public final class OxfordClient {
+public final class OxfordClient implements IOxfordClient {
 
     private static final String BASE_URL_V2 = "https://od-api.oxforddictionaries.com/api/v2";
     private final String endpointUrl;
@@ -54,6 +52,15 @@ public final class OxfordClient {
         this(appId, appKey, BASE_URL_V2);
     }
 
+    @Override
+    public Map<String, List<Result>> getTranslations(final Collection<String> words, final String source, final String target) throws OxfordClientException {
+        Map<String, List<Result>> result = new HashMap<>();
+        for (String word : words) {
+            result.put(word, getTranslations(word, source, target));
+        }
+        return result;
+    }
+
     /**
      * Get result of `translations` endpoint query.
      *
@@ -73,6 +80,16 @@ public final class OxfordClient {
         return query(f.getUrl(), f.getHeader());
     }
 
+    @Override
+    public Map<String, List<Result>> getEntries(final Collection<String> words, final String language, final boolean strict)
+            throws OxfordClientException {
+        Map<String, List<Result>> result = new HashMap<>();
+        for (String word : words) {
+            result.put(word, getEntries(word, language, strict));
+        }
+        return result;
+    }
+
     /**
      * Get result of `entries` endpoint query.
      *
@@ -90,6 +107,11 @@ public final class OxfordClient {
         f.setQueryWord(word);
         f.setStrictMatch(strict);
         return query(f.getUrl(), f.getHeader());
+    }
+
+    @Override
+    public void close() {
+
     }
 
     /**
