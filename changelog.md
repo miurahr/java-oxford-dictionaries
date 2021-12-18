@@ -3,6 +3,16 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+* Introduce OxfordThreadClient to query multiple words
+* Add IOxfordClient interface
+* Introduce OxfordDictionaryEntry POJO class that hold
+  * query word
+  * head word
+  * dictionary article in HTML
+* Refactoring API methods
+  * Add getDefinitions method to return List<OxfordDictionaryEntry>
+  * Add getTranslations method to return List<OxfordDictionaryEntry>
+
 ## [v0.2.0]
 * Update javadoc
 * Introduce RequestFactory class
