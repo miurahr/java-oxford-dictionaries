@@ -12,6 +12,7 @@ public class RequestFactory {
         TRANSLATIONS,
     }
 
+    private final static String BASE_PATH = "/api/v2";
     private final String endpointUrl;
     private final String appId;
     private final String appKey;
@@ -82,6 +83,54 @@ public class RequestFactory {
         header.put("app_id", appId);
         header.put("app_key", appKey);
         return header;
+    }
+
+    public String getUri() throws OxfordClientException {
+        if (queryWord == null) {
+            throw new OxfordClientException("Query word is mandatory");
+        }
+        switch (type) {
+            case ENTRIES:
+                return String.format("%sentries/%s/%s?strictMatch=%s", BASE_PATH, sourceLang, queryWord, strictMatch);
+            case TRANSLATIONS:
+                if (targetLang == null) {
+                    throw new OxfordClientException("Source and Target languages are mandatory");
+                }
+                return String.format("%stranslations/%s/%s?q=%s", BASE_PATH, sourceLang, targetLang, queryWord);
+            default:
+                return null;
+        }
+    }
+
+    public String getPath() throws OxfordClientException {
+        if (queryWord == null) {
+            throw new OxfordClientException("Query word is mandatory");
+        }
+        switch (type) {
+            case ENTRIES:
+                return String.format("%sentries/%s/%s", BASE_PATH, sourceLang, queryWord);
+            case TRANSLATIONS:
+                if (targetLang == null) {
+                    throw new OxfordClientException("Source and Target languages are mandatory");
+                }
+                return String.format("%stranslations/%s/%s", BASE_PATH, sourceLang, targetLang);
+            default:
+                return null;
+        }
+    }
+
+    public String getQueryString() throws OxfordClientException {
+        switch (type) {
+            case ENTRIES:
+                return String.format("strictMatch=%s",strictMatch);
+            case TRANSLATIONS:
+                if (queryWord == null) {
+                    throw new OxfordClientException("Query word is mandatory");
+                }
+                return String.format("?q=%s", queryWord);
+            default:
+                return null;
+        }
     }
 
     public String getUrl() throws OxfordClientException {
