@@ -12,7 +12,7 @@ public class RequestFactory {
         TRANSLATIONS,
     }
 
-    private final static String BASE_PATH = "/api/v2";
+    private static final String BASE_PATH = "/api/v2";
     private final String endpointUrl;
     private final String appId;
     private final String appKey;
@@ -32,8 +32,8 @@ public class RequestFactory {
         type = QueryType.ENTRIES;
     }
 
-    public RequestFactory setType(final QueryType type) {
-        this.type = type;
+    public RequestFactory setType(final QueryType queryType) {
+        this.type = queryType;
         return this;
     }
 
@@ -128,7 +128,7 @@ public class RequestFactory {
     public String getQueryString() throws OxfordClientException {
         switch (type) {
             case ENTRIES:
-                return String.format("strictMatch=%s",strictMatch);
+                return String.format("strictMatch=%s", strictMatch);
             case TRANSLATIONS:
                 if (queryWord == null) {
                     throw new OxfordClientException("Query word is mandatory");

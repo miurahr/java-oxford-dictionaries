@@ -10,7 +10,12 @@ import org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager;
 import tokyo.northside.oxfordapi.dtd.Result;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Oxford dictionaries Async API client.
@@ -31,10 +36,10 @@ public class OxfordThreadClient extends OxfordClientBase {
     }
 
     @Override
-    public Map<String, List<Result>> queryEntries(Collection<String> words, final String language, boolean strict)
-            throws OxfordClientException {
+    public Map<String, List<Result>> queryEntries(final Collection<String> words, final String language,
+                                                  final boolean strict) throws OxfordClientException {
         Map<String, List<Result>> result = new HashMap<>();
-        try (final CloseableHttpClient httpclient = HttpClients.custom()
+        try (CloseableHttpClient httpclient = HttpClients.custom()
                 .setConnectionManager(cm)
                 .build()) {
             final List<RequestFactory> requests = new ArrayList<>();
@@ -54,10 +59,10 @@ public class OxfordThreadClient extends OxfordClientBase {
     public Map<String, List<Result>> queryTranslations(final Collection<String> words, final String source,
                                                        final String target) throws OxfordClientException {
         Map<String, List<Result>> result = new HashMap<>();
-        try (final CloseableHttpClient httpclient = HttpClients.custom()
+        try (CloseableHttpClient httpclient = HttpClients.custom()
                 .setConnectionManager(cm)
                 .build()) {
-            final List<RequestFactory> requests = new ArrayList<>();
+            List<RequestFactory> requests = new ArrayList<>();
             for (final String query : words) {
                 RequestFactory factory = new RequestFactory(appId, appKey, ENDPOINT_URL);
                 factory.setQueryWord(query).setSourceLanguage(source).setTargetLanguage(target);
@@ -70,7 +75,8 @@ public class OxfordThreadClient extends OxfordClientBase {
         return result;
     }
 
-    private void runThread(final Map<String, List<Result>> result, final CloseableHttpClient httpclient, final List<RequestFactory> requests) throws OxfordClientException, InterruptedException {
+    private void runThread(final Map<String, List<Result>> result, final CloseableHttpClient httpclient,
+                           final List<RequestFactory> requests) throws OxfordClientException, InterruptedException {
         GetThread[] threads = new GetThread[requests.size()];
         for (int i = 0; i < threads.length; i++) {
             HttpGet httpGet = new HttpGet(requests.get(i).getUrl());
@@ -123,7 +129,7 @@ public class OxfordThreadClient extends OxfordClientBase {
         private final String word;
         private final int id;
 
-        public GetThread(final CloseableHttpClient httpClient, final HttpGet httpget,
+        GetThread(final CloseableHttpClient httpClient, final HttpGet httpget,
                          final String word, final Map<String, List<Result>> result, final int id) {
             this.httpClient = httpClient;
             this.httpget = httpget;
@@ -140,7 +146,9 @@ public class OxfordThreadClient extends OxfordClientBase {
             try {
                 String response = httpClient.execute(httpget, RESPONSE_HANDLER);
                 if (response != null) {
-                    synchronized (result) { result.putAll(parseResponse(word, response)); }
+                    synchronized (result) {
+                        result.putAll(parseResponse(word, response));
+                    }
                 }
             } catch (IOException e) {
                 System.out.println(id + " - error: " + e);

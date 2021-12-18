@@ -1,6 +1,11 @@
 package tokyo.northside.oxfordapi;
 
-import tokyo.northside.oxfordapi.dtd.*;
+import tokyo.northside.oxfordapi.dtd.Entry;
+import tokyo.northside.oxfordapi.dtd.Example;
+import tokyo.northside.oxfordapi.dtd.LexicalEntry;
+import tokyo.northside.oxfordapi.dtd.Pronunciation;
+import tokyo.northside.oxfordapi.dtd.Sense;
+import tokyo.northside.oxfordapi.dtd.Translation;
 
 import java.util.List;
 

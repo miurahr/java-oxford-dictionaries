@@ -11,13 +11,12 @@ import tokyo.northside.oxfordapi.dtd.Result;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 public abstract class OxfordClientBase implements IOxfordClient {
 
-    public List<OxfordDictionaryEntry> getTranslations(Collection<String> words, String source, String target)
-            throws OxfordClientException {
+    public List<OxfordDictionaryEntry> getTranslations(final Collection<String> words, final String source,
+                                                       final String target) throws OxfordClientException {
         List<OxfordDictionaryEntry> dictionaryEntries = new ArrayList<>();
         queryTranslations(words, source, target).entrySet()
                 .forEach(entry -> {

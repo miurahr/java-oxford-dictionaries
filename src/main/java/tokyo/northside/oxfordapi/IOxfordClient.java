@@ -16,7 +16,7 @@ public interface IOxfordClient {
     Map<String, List<Result>> queryTranslations(Collection<String> words, String source, String target)
             throws OxfordClientException;
 
-    Map<String, List<Result>> queryEntries(Collection<String>words, String language, boolean strict)
+    Map<String, List<Result>> queryEntries(Collection<String> words, String language, boolean strict)
             throws OxfordClientException;
 
     List<OxfordDictionaryEntry> getDefinitions(Collection<String> words, String language, boolean strict)

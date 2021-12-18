@@ -3,15 +3,9 @@ package tokyo.northside.oxfordapi;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.hc.client5.http.ClientProtocolException;
 import org.apache.hc.client5.http.classic.methods.HttpGet;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
 import org.apache.hc.client5.http.impl.classic.HttpClients;
-import org.apache.hc.core5.http.HttpEntity;
-import org.apache.hc.core5.http.HttpStatus;
-import org.apache.hc.core5.http.ParseException;
-import org.apache.hc.core5.http.io.HttpClientResponseHandler;
-import org.apache.hc.core5.http.io.entity.EntityUtils;
 import tokyo.northside.oxfordapi.dtd.Result;
 
 import java.io.IOException;
@@ -57,7 +51,8 @@ public class OxfordClient extends OxfordClientBase {
     }
 
     @Override
-    public Map<String, List<Result>> queryTranslations(final Collection<String> words, final String source, final String target) throws OxfordClientException {
+    public Map<String, List<Result>> queryTranslations(final Collection<String> words, final String source,
+                                                       final String target) throws OxfordClientException {
         Map<String, List<Result>> result = new HashMap<>();
         for (String word : words) {
             result.put(word, queryTranslation(word, source, target));
@@ -86,8 +81,8 @@ public class OxfordClient extends OxfordClientBase {
     }
 
     @Override
-    public Map<String, List<Result>> queryEntries(final Collection<String> words, final String language, final boolean strict)
-            throws OxfordClientException {
+    public Map<String, List<Result>> queryEntries(final Collection<String> words, final String language,
+                                                  final boolean strict) throws OxfordClientException {
         Map<String, List<Result>> result = new HashMap<>();
         for (String word : words) {
             result.put(word, queryEntry(word, language, strict));
