@@ -88,7 +88,35 @@ Use the **AppId** and **AppKey**  when creating the client.
 
 ## Usage in Java application
 
-1. query definition, and return HTML format of definitions.
+1. Get definitions in HTML with threading query
+
+
+<details>
+<p>
+
+```java
+class Main {
+     public static String getDefinitions() {
+         String appId = System.getenv("APP_ID");
+         String appKey = System.getenv("APP_KEY");
+         String lang = "en-gb";
+         boolean strictMatch = false;
+         Collection<String> words = Arrays.asList("ace", "alpha");
+         //
+         OxfordThreadClient oxfordThreadClient = new OxfordThreadClient(appId, appkey);
+         List<OxfordDictionaryEntry> result = oxfordThreadClient.getDefinitions(words, lang, strictMatch);
+         //
+         return result.stream()
+                 .map(res -> res.getWord() + ": " + res.getArticle())
+                 .collect(Collectors.joining("<br/>"));
+     }
+ }
+```
+
+</p>
+</details>
+
+2. query definition, and return HTML format of definitions.
 
 <details>
 <p>
@@ -104,7 +132,7 @@ class Main {
   String word = "ace";
   //
   OxfordClient oxfordClient = new OxfordClient(appId, appKey, baseUrl);
-  List<Result> results = oxfordClient.getEntries(word, lang, strictMatch);
+  List<Result> results = oxfordClient.queryEntries(word, lang, strictMatch);
   //
   Result result = results.get(0);
   assert(result.getId().equals(word));
@@ -134,7 +162,7 @@ class Main {
 
 </p></details>
 
-2. query translations in French.
+3. query translations in French.
 
 <details>
 <p>
@@ -152,7 +180,7 @@ class Main {
   String word = "ace";
   //
   OxfordClient oxfordClient = new OxfordClient(appId, appKey, baseUrl);
-  List<Result> results = oxfordClient.getTranslations(word, source, target);
+  List<Result> results = oxfordClient.queryTranslations(word, source, target);
   //
   Result result = results.get(0);
   assert (result.getId().equals(word));
@@ -174,7 +202,7 @@ class Main {
 </p>
 </details>
 
-3. generic query programming interface.
+4. generic query programming interface.
 
 <details><p>
 
