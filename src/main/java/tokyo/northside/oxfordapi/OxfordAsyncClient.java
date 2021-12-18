@@ -47,6 +47,7 @@ public class OxfordAsyncClient extends OxfordClientBase {
 
     private final String appId;
     private final String appKey;
+    private RequestFactory factory;
 
     public OxfordAsyncClient(final String appId, final String appKey) {
         this.appId = appId;
@@ -61,64 +62,25 @@ public class OxfordAsyncClient extends OxfordClientBase {
                 ioReactorConfig);
         client.start();
         mapper = new ObjectMapper();
+        factory = new RequestFactory(appId, appKey, ENDPOINT_URL);
     }
 
     @Override
     public Map<String, List<Result>> queryEntries(Collection<String> words, final String language, boolean strict)
             throws OxfordClientException {
-        final HttpHost target = new HttpHost(OD_API_HOST);
-        final Future<AsyncClientEndpoint> leaseFuture = client.lease(target, null);
-        final AsyncClientEndpoint endpoint;
+        final HttpHost httpHost = new HttpHost(OD_API_HOST);
+        final AsyncClientEndpoint endpoint = createEndpoint(httpHost);
         try {
-            endpoint = leaseFuture.get(30, TimeUnit.SECONDS);
-        } catch (InterruptedException | ExecutionException | TimeoutException e) {
-            throw new OxfordClientException(e.getMessage());
-        }
-        final CountDownLatch latch = new CountDownLatch(words.size());
-        RequestFactory factory = new RequestFactory(appId, appKey, ENDPOINT_URL);
-        for (final String query: words) {
-            factory.setQueryWord(query);
-            factory.setLanguage(language);
-            factory.setStrictMatch(strict);
-            final SimpleHttpRequest request = SimpleRequestBuilder.get()
-                    .setHttpHost(target)
-                    .setHeader(HttpHeaders.ACCEPT, "application/json")
-                    .setHeader("app_id", appId)
-                    .setHeader("app_key", appKey)
-                    .setUri(factory.getUri())
-                    .build();
-            Future<SimpleHttpResponse> responseFuture = endpoint.execute(
-                    SimpleRequestProducer.create(request),
-                    SimpleResponseConsumer.create(),
-                    new FutureCallback<SimpleHttpResponse>() {
-                        @Override
-                        public void completed(final SimpleHttpResponse result) {
-                            latch.countDown();
-                            StatusLine statusLine = new StatusLine(result);
-                            if (statusLine.isSuccessful()) {
-                                articles = parseResponse(query, result.getBodyText());
-                            }
-                        }
-
-                        @Override
-                        public void failed(final Exception ex) {
-                            latch.countDown();
-                        }
-
-                        @Override
-                        public void cancelled() {
-                            latch.countDown();
-                        }
-                    }
-            );
-            if (responseFuture.isCancelled()) {
-                throw new OxfordClientException("Request canceled.");
+            final CountDownLatch latch = new CountDownLatch(words.size());
+            for (final String query: words) {
+                factory.setQueryWord(query).setLanguage(language).setStrictMatch(strict);
+                doHttpRequest(httpHost, endpoint, latch, factory, query);
             }
-        }
-        try {
             latch.await();
         } catch (InterruptedException e) {
             throw new OxfordClientException("Request interrupted.");
+        } finally {
+            endpoint.releaseAndReuse();
         }
         return articles;
     }
@@ -127,55 +89,13 @@ public class OxfordAsyncClient extends OxfordClientBase {
     public Map<String, List<Result>> queryTranslations(final Collection<String> words, final String source,
                                                      final String target) throws OxfordClientException {
         final HttpHost httpHost = new HttpHost(OD_API_HOST);
-        final Future<AsyncClientEndpoint> leaseFuture = client.lease(httpHost, null);
-        final AsyncClientEndpoint endpoint;
+        final AsyncClientEndpoint endpoint = createEndpoint(httpHost);
         try {
-            endpoint = leaseFuture.get(30, TimeUnit.SECONDS);
-        } catch (InterruptedException | ExecutionException | TimeoutException e) {
-            throw new OxfordClientException(e.getMessage());
-        }
-        final CountDownLatch latch = new CountDownLatch(words.size());
-        RequestFactory factory = new RequestFactory(appId, appKey, ENDPOINT_URL);
-        for (final String query: words) {
-            factory.setQueryWord(query);
-            factory.setSourceLanguage(source);
-            factory.setTargetLanguage(target);
-            final SimpleHttpRequest request = SimpleRequestBuilder.get()
-                    .setHttpHost(httpHost)
-                    .setHeader(HttpHeaders.ACCEPT, "application/json")
-                    .setHeader("app_id", appId)
-                    .setHeader("app_key", appKey)
-                    .setUri(factory.getUri())
-                    .build();
-            Future<SimpleHttpResponse> responseFuture = endpoint.execute(
-                    SimpleRequestProducer.create(request),
-                    SimpleResponseConsumer.create(),
-                    new FutureCallback<SimpleHttpResponse>() {
-                        @Override
-                        public void completed(final SimpleHttpResponse result) {
-                            latch.countDown();
-                            StatusLine statusLine = new StatusLine(result);
-                            if (statusLine.isSuccessful()) {
-                                articles = parseResponse(query, result.getBodyText());
-                            }
-                        }
-
-                        @Override
-                        public void failed(final Exception ex) {
-                            latch.countDown();
-                        }
-
-                        @Override
-                        public void cancelled() {
-                            latch.countDown();
-                        }
-                    }
-            );
-            if (responseFuture.isCancelled()) {
-                throw new OxfordClientException("Request canceled.");
+            final CountDownLatch latch = new CountDownLatch(words.size());
+            for (final String query: words) {
+                factory.setQueryWord(query).setSourceLanguage(source).setTargetLanguage(target);
+                doHttpRequest(httpHost, endpoint, latch, factory, query);
             }
-        }
-        try {
             latch.await();
         } catch (InterruptedException e) {
             throw new OxfordClientException("Request interrupted.");
@@ -184,13 +104,64 @@ public class OxfordAsyncClient extends OxfordClientBase {
     }
 
     @Override
-    public List<Result> queryTranslation(final String word, final String source, final String target) throws OxfordClientException {
+    public List<Result> queryTranslation(final String word, final String source, final String target)
+            throws OxfordClientException {
         return queryTranslations(Collections.singletonList(word), source, target).get(word);
     }
 
     @Override
-    public List<Result> queryEntry(final String word, final String language, final boolean strict) throws OxfordClientException {
+    public List<Result> queryEntry(final String word, final String language, final boolean strict)
+            throws OxfordClientException {
         return queryEntries(Collections.singletonList(word), language, strict).get(word);
+    }
+
+    private AsyncClientEndpoint createEndpoint(final HttpHost httpHost) throws OxfordClientException {
+        final Future<AsyncClientEndpoint> leaseFuture = client.lease(httpHost, null);
+        final AsyncClientEndpoint endpoint;
+        try {
+            endpoint = leaseFuture.get(30, TimeUnit.SECONDS);
+        } catch (InterruptedException | ExecutionException | TimeoutException e) {
+            throw new OxfordClientException(e.getMessage());
+        }
+        return endpoint;
+    }
+
+    private void doHttpRequest(final HttpHost httpHost, final AsyncClientEndpoint endpoint, final CountDownLatch latch,
+                               final RequestFactory factory, final String query) throws OxfordClientException {
+        final SimpleHttpRequest request = SimpleRequestBuilder.get()
+                .setHttpHost(httpHost)
+                .setHeader(HttpHeaders.ACCEPT, "application/json")
+                .setHeader("app_id", appId)
+                .setHeader("app_key", appKey)
+                .setUri(factory.getUri())
+                .build();
+        Future<SimpleHttpResponse> responseFuture = endpoint.execute(
+                SimpleRequestProducer.create(request),
+                SimpleResponseConsumer.create(),
+                new FutureCallback<SimpleHttpResponse>() {
+                    @Override
+                    public void completed(final SimpleHttpResponse result) {
+                        latch.countDown();
+                        StatusLine statusLine = new StatusLine(result);
+                        if (statusLine.isSuccessful()) {
+                            articles = parseResponse(query, result.getBodyText());
+                        }
+                    }
+
+                    @Override
+                    public void failed(final Exception ex) {
+                        latch.countDown();
+                    }
+
+                    @Override
+                    public void cancelled() {
+                        latch.countDown();
+                    }
+                }
+        );
+        if (responseFuture.isCancelled()) {
+            throw new OxfordClientException("Request canceled.");
+        }
     }
 
     private Map<String, List<Result>> parseResponse(final String word, final String json) {

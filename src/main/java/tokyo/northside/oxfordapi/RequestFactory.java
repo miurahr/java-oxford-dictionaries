@@ -32,44 +32,50 @@ public class RequestFactory {
         type = QueryType.ENTRIES;
     }
 
-    public void setType(final QueryType type) {
+    public RequestFactory setType(final QueryType type) {
         this.type = type;
+        return this;
     }
 
-    public void setQueryWord(final String word) {
+    public RequestFactory setQueryWord(final String word) {
         queryWord = word.toLowerCase();
+        return this;
     }
 
-    public void setLanguage(final String language) {
+    public RequestFactory setLanguage(final String language) {
         if (language.equalsIgnoreCase("en")) {
             sourceLang = "en-gb";
         } else {
             sourceLang = language.toLowerCase();
         }
+        return this;
     }
 
-    public void setSourceLanguage(final String language) {
+    public RequestFactory setSourceLanguage(final String language) {
         if (language.equalsIgnoreCase("en")) {
             sourceLang = "en-gb";
         } else {
             sourceLang = language.toLowerCase();
         }
+        return this;
     }
 
-    public void setTargetLanguage(final String language) {
+    public RequestFactory setTargetLanguage(final String language) {
         if (language.equalsIgnoreCase("en")) {
             targetLang = "en-gb";
         } else {
             targetLang = language.toLowerCase();
         }
+        return this;
     }
 
-    public void setStrictMatch(final boolean strict) {
+    public RequestFactory setStrictMatch(final boolean strict) {
         if (strict) {
             strictMatch = "true";
         } else {
             strictMatch = "false";
         }
+        return this;
     }
 
     /**
