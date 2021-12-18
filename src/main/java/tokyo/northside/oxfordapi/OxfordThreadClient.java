@@ -17,14 +17,14 @@ import java.util.*;
  *
  * @author Hiroshi Miura
  */
-public class OxfordAsyncClient extends OxfordClientBase {
+public class OxfordThreadClient extends OxfordClientBase {
     private static final String ENDPOINT_URL = "https://od-api.oxforddictionaries.com/api/v2/";
     private final PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager();
 
     private final String appId;
     private final String appKey;
 
-    public OxfordAsyncClient(final String appId, final String appKey) {
+    public OxfordThreadClient(final String appId, final String appKey) {
         this.appId = appId;
         this.appKey = appKey;
         cm.setMaxTotal(100);
