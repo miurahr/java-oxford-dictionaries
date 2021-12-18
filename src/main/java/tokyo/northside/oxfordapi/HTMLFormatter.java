@@ -9,7 +9,7 @@ public final class HTMLFormatter {
     private HTMLFormatter() {
     }
 
-    public static DictionaryEntry formatTranslations(final LexicalEntry lexicalEntry) {
+    public static OxfordDictionaryEntry formatTranslations(final LexicalEntry lexicalEntry) {
         String title = lexicalEntry.getText();
         StringBuilder sb = new StringBuilder("<ol>");
         for (Entry entry : lexicalEntry.getEntries()) {
@@ -23,7 +23,7 @@ public final class HTMLFormatter {
             }
         }
         sb.append("</ol>");
-        return new DictionaryEntry(title, sb.toString());
+        return new OxfordDictionaryEntry(title, sb.toString());
     }
 
     public static String formatDefinitions(final LexicalEntry lexicalEntry) {

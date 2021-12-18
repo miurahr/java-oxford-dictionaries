@@ -19,10 +19,10 @@ public interface IOxfordClient {
     Map<String, List<Result>> queryEntries(Collection<String>words, String language, boolean strict)
             throws OxfordClientException;
 
-    List<DictionaryEntry> getDefinitions(Collection<String> words, String language, boolean strict)
+    List<OxfordDictionaryEntry> getDefinitions(Collection<String> words, String language, boolean strict)
             throws OxfordClientException;
 
-    List<DictionaryEntry> getTranslations(Collection<String> words, String source, String target)
+    List<OxfordDictionaryEntry> getTranslations(Collection<String> words, String source, String target)
             throws OxfordClientException;
 
     void close();

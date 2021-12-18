@@ -10,15 +10,15 @@ import java.util.List;
 
 public abstract class OxfordClientBase implements IOxfordClient {
 
-    public List<DictionaryEntry> getTranslations(Collection<String> words, String source, String target)
+    public List<OxfordDictionaryEntry> getTranslations(Collection<String> words, String source, String target)
             throws OxfordClientException {
-        List<DictionaryEntry> dictionaryEntries = new ArrayList<>();
+        List<OxfordDictionaryEntry> dictionaryEntries = new ArrayList<>();
         try {
             queryTranslations(words, source, target).entrySet()
                     .forEach(entry -> {
                         for (Result result: entry.getValue()) {
                             for (LexicalEntry lexicalEntry: result.getLexicalEntries()) {
-                                dictionaryEntries.add(new DictionaryEntry(
+                                dictionaryEntries.add(new OxfordDictionaryEntry(
                                         entry.getKey(),
                                         lexicalEntry.getText(),
                                         HTMLFormatter.formatDefinitions(lexicalEntry)));
@@ -31,15 +31,15 @@ public abstract class OxfordClientBase implements IOxfordClient {
         return dictionaryEntries;
     }
 
-    public List<DictionaryEntry> getDefinitions(final Collection<String> words, final String language,
-                                                 final boolean strict) throws OxfordClientException {
-        List<DictionaryEntry> dictionaryEntries = new ArrayList<>();
+    public List<OxfordDictionaryEntry> getDefinitions(final Collection<String> words, final String language,
+                                                      final boolean strict) throws OxfordClientException {
+        List<OxfordDictionaryEntry> dictionaryEntries = new ArrayList<>();
         try {
             queryEntries(words, language, strict).entrySet()
                     .forEach(entry -> {
                         for (Result result: entry.getValue()) {
                             for (LexicalEntry lexicalEntry: result.getLexicalEntries()) {
-                                dictionaryEntries.add(new DictionaryEntry(
+                                dictionaryEntries.add(new OxfordDictionaryEntry(
                                         entry.getKey(),
                                         lexicalEntry.getText(),
                                         HTMLFormatter.formatDefinitions(lexicalEntry)));

@@ -6,18 +6,18 @@ package tokyo.northside.oxfordapi;
  * @author Alex Buloichik
  * @author Hiroshi Miura
  */
-public class DictionaryEntry implements Comparable<DictionaryEntry> {
+public class OxfordDictionaryEntry implements Comparable<OxfordDictionaryEntry> {
     private final String query;
     private final String word;
     private final String article;
 
-    public DictionaryEntry(final String word, final String article) {
+    public OxfordDictionaryEntry(final String word, final String article) {
         this.query = word.toLowerCase();
         this.word = word;
         this.article = article;
     }
 
-    public DictionaryEntry(final String query, final String word, final String article) {
+    public OxfordDictionaryEntry(final String query, final String word, final String article) {
         this.query = query;
         this.word = word;
         this.article = article;
@@ -36,7 +36,7 @@ public class DictionaryEntry implements Comparable<DictionaryEntry> {
     }
 
     @Override
-    public int compareTo(DictionaryEntry o) {
+    public int compareTo(OxfordDictionaryEntry o) {
         if (query.equals(o.query)) {
             return word.compareTo(o.word);
         } else {
