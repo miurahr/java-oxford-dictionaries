@@ -115,6 +115,11 @@ public class OxfordAsyncClient extends OxfordClientBase {
                 throw new OxfordClientException("Request canceled.");
             }
         }
+        try {
+            latch.await();
+        } catch (InterruptedException e) {
+            throw new OxfordClientException("Request interrupted.");
+        }
         return articles;
     }
 
@@ -169,6 +174,11 @@ public class OxfordAsyncClient extends OxfordClientBase {
             if (responseFuture.isCancelled()) {
                 throw new OxfordClientException("Request canceled.");
             }
+        }
+        try {
+            latch.await();
+        } catch (InterruptedException e) {
+            throw new OxfordClientException("Request interrupted.");
         }
         return articles;
     }
