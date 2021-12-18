@@ -107,11 +107,11 @@ public class OxfordClient extends OxfordClientBase {
     @Override
     public List<Result> queryEntry(final String word, final String language, final boolean strict)
             throws OxfordClientException {
-        RequestFactory f = new RequestFactory(appId, appKey, endpointUrl);
-        f.setType(RequestFactory.QueryType.ENTRIES);
-        f.setLanguage(language);
-        f.setQueryWord(word);
-        f.setStrictMatch(strict);
+        RequestFactory f = new RequestFactory(appId, appKey, endpointUrl)
+                .setType(RequestFactory.QueryType.ENTRIES)
+                .setLanguage(language)
+                .setQueryWord(word)
+                .setStrictMatch(strict);
         return query(f.getUrl(), f.getHeader());
     }
 
@@ -150,20 +150,4 @@ public class OxfordClient extends OxfordClientBase {
         return Collections.emptyList();
     }
 
-    private static final HttpClientResponseHandler<String> RESPONSE_HANDLER = response -> {
-        final int status = response.getCode();
-        if (status >= HttpStatus.SC_SUCCESS && status < HttpStatus.SC_REDIRECTION) {
-            try (HttpEntity entity = response.getEntity()) {
-                if (entity != null) {
-                    return EntityUtils.toString(entity);
-                } else {
-                    return null;
-                }
-            } catch (final ParseException ex) {
-                throw new ClientProtocolException(ex);
-            }
-        } else {
-            throw new ClientProtocolException(String.format("Unexpected response status: %d", status));
-        }
-    };
 }

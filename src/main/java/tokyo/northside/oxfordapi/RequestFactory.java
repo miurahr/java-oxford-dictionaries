@@ -156,4 +156,8 @@ public class RequestFactory {
         }
     }
 
+    public String getQueryWord() {
+        return queryWord;
+    }
+
 }
