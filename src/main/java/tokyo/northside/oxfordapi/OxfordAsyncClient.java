@@ -52,6 +52,7 @@ public class OxfordAsyncClient extends OxfordClientBase {
     public OxfordAsyncClient(final String appId, final String appKey) {
         this.appId = appId;
         this.appKey = appKey;
+        factory = new RequestFactory(appId, appKey, ENDPOINT_URL);
         ioReactorConfig = IOReactorConfig.custom()
                 .setSoTimeout(Timeout.ofSeconds(5))
                 .build();
@@ -62,7 +63,6 @@ public class OxfordAsyncClient extends OxfordClientBase {
                 ioReactorConfig);
         client.start();
         mapper = new ObjectMapper();
-        factory = new RequestFactory(appId, appKey, ENDPOINT_URL);
     }
 
     @Override

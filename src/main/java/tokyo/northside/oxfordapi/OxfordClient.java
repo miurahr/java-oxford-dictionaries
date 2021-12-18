@@ -77,11 +77,11 @@ public class OxfordClient extends OxfordClientBase {
     @Override
     public List<Result> queryTranslation(final String word, final String source, final String target)
             throws OxfordClientException {
-        RequestFactory f = new RequestFactory(appId, appKey, endpointUrl);
-        f.setType(RequestFactory.QueryType.TRANSLATIONS);
-        f.setSourceLanguage(source);
-        f.setTargetLanguage(target);
-        f.setQueryWord(word);
+        RequestFactory f = new RequestFactory(appId, appKey, endpointUrl)
+                .setType(RequestFactory.QueryType.TRANSLATIONS)
+                .setSourceLanguage(source)
+                .setTargetLanguage(target)
+                .setQueryWord(word);
         return query(f.getUrl(), f.getHeader());
     }
 
