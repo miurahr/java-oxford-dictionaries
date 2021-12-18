@@ -87,7 +87,7 @@ public class OxfordAsyncClient extends OxfordClientBase {
                     .setHeader("app_key", appKey)
                     .setUri(factory.getUri())
                     .build();
-            endpoint.execute(
+            Future<SimpleHttpResponse> responseFuture = endpoint.execute(
                     SimpleRequestProducer.create(request),
                     SimpleResponseConsumer.create(),
                     new FutureCallback<SimpleHttpResponse>() {
@@ -111,6 +111,9 @@ public class OxfordAsyncClient extends OxfordClientBase {
                         }
                     }
             );
+            if (responseFuture.isCancelled()) {
+                throw new OxfordClientException("Request canceled.");
+            }
         }
         return articles;
     }
@@ -139,7 +142,7 @@ public class OxfordAsyncClient extends OxfordClientBase {
                     .setHeader("app_key", appKey)
                     .setUri(factory.getUri())
                     .build();
-            endpoint.execute(
+            Future<SimpleHttpResponse> responseFuture = endpoint.execute(
                     SimpleRequestProducer.create(request),
                     SimpleResponseConsumer.create(),
                     new FutureCallback<SimpleHttpResponse>() {
@@ -163,6 +166,9 @@ public class OxfordAsyncClient extends OxfordClientBase {
                         }
                     }
             );
+            if (responseFuture.isCancelled()) {
+                throw new OxfordClientException("Request canceled.");
+            }
         }
         return articles;
     }
