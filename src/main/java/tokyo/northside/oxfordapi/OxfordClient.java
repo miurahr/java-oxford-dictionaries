@@ -26,7 +26,7 @@ import java.util.Map;
  *
  * @author Hiroshi Miura
  */
-public final class OxfordClient extends OxfordClientBase {
+public class OxfordClient extends OxfordClientBase {
 
     private static final String BASE_URL_V2 = "https://od-api.oxforddictionaries.com/api/v2";
     private final String endpointUrl;
