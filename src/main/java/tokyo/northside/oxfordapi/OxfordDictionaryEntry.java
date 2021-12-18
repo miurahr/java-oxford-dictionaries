@@ -90,12 +90,12 @@ public class OxfordDictionaryEntry implements Comparable<OxfordDictionaryEntry> 
         if (word != null) {
             result = 31 * result + word.hashCode();
         } else {
-            result = 31 * result + 0;
+            result = 31 * result;
         }
         if (article != null) {
             result = 31 * result + article.hashCode();
         } else {
-            result = 31 * result + 0;
+            result = 31 * result;
         }
         return result;
     }
