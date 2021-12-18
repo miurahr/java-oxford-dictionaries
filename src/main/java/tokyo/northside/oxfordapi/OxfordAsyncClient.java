@@ -21,6 +21,7 @@ import tokyo.northside.oxfordapi.dtd.Result;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,7 +31,12 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-public class OxfordAsyncClient implements IOxfordClient {
+/**
+ * Oxford dictionaries Async API client.
+ *
+ * @author Hiroshi Miura
+ */
+public class OxfordAsyncClient extends OxfordClientBase {
 
     private static final String OD_API_HOST = "od-api.oxforddictionaries.com";
     private static final String ENDPOINT_URL = "https://od-api.oxforddictionaries.com/api/v2";
@@ -57,7 +63,8 @@ public class OxfordAsyncClient implements IOxfordClient {
         mapper = new ObjectMapper();
     }
 
-    public Map<String, List<Result>> getEntries(Collection<String> words, final String language, boolean strict)
+    @Override
+    public Map<String, List<Result>> queryEntries(Collection<String> words, final String language, boolean strict)
             throws OxfordClientException {
         final HttpHost target = new HttpHost(OD_API_HOST);
         final Future<AsyncClientEndpoint> leaseFuture = client.lease(target, null);
@@ -108,18 +115,8 @@ public class OxfordAsyncClient implements IOxfordClient {
         return articles;
     }
 
-    private Map<String, List<Result>> parseResponse(final String word, final String json) {
-        Map<String, List<Result>> articles = new HashMap<>();
-        try {
-            JsonNode node = mapper.readTree(json);
-            articles.put(word, mapper.readValue(node.get("results").traverse(), new TypeReference<List<Result>>() { }));
-        } catch (IOException ignored) {
-        }
-        return articles;
-    }
-
     @Override
-    public Map<String, List<Result>> getTranslations(final Collection<String> words, final String source,
+    public Map<String, List<Result>> queryTranslations(final Collection<String> words, final String source,
                                                      final String target) throws OxfordClientException {
         final HttpHost httpHost = new HttpHost(OD_API_HOST);
         final Future<AsyncClientEndpoint> leaseFuture = client.lease(httpHost, null);
@@ -171,13 +168,23 @@ public class OxfordAsyncClient implements IOxfordClient {
     }
 
     @Override
-    public List<Result> getTranslations(final String word, final String source, final String target) throws OxfordClientException {
-        return null;
+    public List<Result> queryTranslation(final String word, final String source, final String target) throws OxfordClientException {
+        return queryTranslations(Collections.singletonList(word), source, target).get(word);
     }
 
     @Override
-    public List<Result> getEntries(final String word, final String language, final boolean strict) throws OxfordClientException {
-        return null;
+    public List<Result> queryEntry(final String word, final String language, final boolean strict) throws OxfordClientException {
+        return queryEntries(Collections.singletonList(word), language, strict).get(word);
+    }
+
+    private Map<String, List<Result>> parseResponse(final String word, final String json) {
+        Map<String, List<Result>> articles = new HashMap<>();
+        try {
+            JsonNode node = mapper.readTree(json);
+            articles.put(word, mapper.readValue(node.get("results").traverse(), new TypeReference<List<Result>>() { }));
+        } catch (IOException ignored) {
+        }
+        return articles;
     }
 
     public void close() {

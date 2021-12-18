@@ -15,14 +15,18 @@ import org.apache.hc.core5.http.io.entity.EntityUtils;
 import tokyo.northside.oxfordapi.dtd.Result;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Oxford dictionaries API access client.
  *
  * @author Hiroshi Miura
  */
-public final class OxfordClient implements IOxfordClient {
+public final class OxfordClient extends OxfordClientBase {
 
     private static final String BASE_URL_V2 = "https://od-api.oxforddictionaries.com/api/v2";
     private final String endpointUrl;
@@ -53,10 +57,10 @@ public final class OxfordClient implements IOxfordClient {
     }
 
     @Override
-    public Map<String, List<Result>> getTranslations(final Collection<String> words, final String source, final String target) throws OxfordClientException {
+    public Map<String, List<Result>> queryTranslations(final Collection<String> words, final String source, final String target) throws OxfordClientException {
         Map<String, List<Result>> result = new HashMap<>();
         for (String word : words) {
-            result.put(word, getTranslations(word, source, target));
+            result.put(word, queryTranslation(word, source, target));
         }
         return result;
     }
@@ -70,7 +74,8 @@ public final class OxfordClient implements IOxfordClient {
      * @return List of Result object.
      * @throws OxfordClientException when connection or parse error occurred
      */
-    public List<Result> getTranslations(final String word, final String source, final String target)
+    @Override
+    public List<Result> queryTranslation(final String word, final String source, final String target)
             throws OxfordClientException {
         RequestFactory f = new RequestFactory(appId, appKey, endpointUrl);
         f.setType(RequestFactory.QueryType.TRANSLATIONS);
@@ -81,11 +86,11 @@ public final class OxfordClient implements IOxfordClient {
     }
 
     @Override
-    public Map<String, List<Result>> getEntries(final Collection<String> words, final String language, final boolean strict)
+    public Map<String, List<Result>> queryEntries(final Collection<String> words, final String language, final boolean strict)
             throws OxfordClientException {
         Map<String, List<Result>> result = new HashMap<>();
         for (String word : words) {
-            result.put(word, getEntries(word, language, strict));
+            result.put(word, queryEntry(word, language, strict));
         }
         return result;
     }
@@ -99,7 +104,8 @@ public final class OxfordClient implements IOxfordClient {
      * @return List of Result object.
      * @throws OxfordClientException when connection or parse error occurred
      */
-    public List<Result> getEntries(final String word, final String language, final boolean strict)
+    @Override
+    public List<Result> queryEntry(final String word, final String language, final boolean strict)
             throws OxfordClientException {
         RequestFactory f = new RequestFactory(appId, appKey, endpointUrl);
         f.setType(RequestFactory.QueryType.ENTRIES);
