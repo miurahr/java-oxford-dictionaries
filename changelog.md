@@ -3,6 +3,7 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [v0.3.0]
 * Introduce OxfordThreadClient to query multiple words
 * Add IOxfordClient interface
 * Introduce OxfordDictionaryEntry POJO class that hold
@@ -27,6 +28,8 @@ All notable changes to this project will be documented in this file.
 ## [v0.1.0]
 * First alpha
 
-[Unreleased]: https://github.com/miurahr/java-oxford-dictionaries/compare/v0.1.1...HEAD
+[Unreleased]: https://github.com/miurahr/java-oxford-dictionaries/compare/v0.3.0...HEAD
+[v0.1.1]: https://github.com/miurahr/java-oxford-dictionaries/compare/v0.2.0...v0.3.0
+[v0.2.0]: https://github.com/miurahr/java-oxford-dictionaries/compare/v0.1.1...v0.2.0
 [v0.1.1]: https://github.com/miurahr/java-oxford-dictionaries/compare/v0.1.0...v0.1.1
 [v0.1.0]: https://github.com/miurahr/java-oxford-dictionaries/compare/v0.0.1...v0.1.0

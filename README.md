@@ -63,7 +63,7 @@ All needed to start using the project is to add the dependency
 <dependency>
   <groupId>tokyo.northside</groupId>
   <artifactId>java-oxford-dictionaries</artifactId>
-  <version>0.1.0</version>
+  <version>0.3.0</version>
 </dependency>
 ```
 
@@ -71,12 +71,12 @@ All needed to start using the project is to add the dependency
 
 **Gradle Kotlin DSL**
 ```console
-implementation("tokyo.northside:java-oxford-dictionaries:0.1.0")
+implementation("tokyo.northside:java-oxford-dictionaries:0.3.0")
 ```
 
 **Gradle**
 ```console
-implementation 'tokyo.northside:java-oxford-dictionaries:0.1.0'
+implementation 'tokyo.northside:java-oxford-dictionaries:0.3.0'
 ```
 
 ## Authentication App Key and Id
