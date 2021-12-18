@@ -30,6 +30,8 @@ jobs:
       env:
         ORG_GRADLE_PROJECT_signingKey: ${{ secrets.GPG_SECRET_KEY }}
         ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.GPG_KEY_PASSPHARASE }}
+        ORG_GRADLE_PROJECT_oxfordId: ${{ secrets.OXFORD_ID }}
+        ORG_GRADLE_PROJECT_oxfordKey: ${{ secrets.OXFORD_KEY }}
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1

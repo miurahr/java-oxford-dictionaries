@@ -21,3 +21,6 @@ jobs:
       with:
         gradle-version: wrapper
         arguments: check printVersion
+      env:
+        ORG_GRADLE_PROJECT_oxfordId: ${{ secrets.OXFORD_ID }}
+        ORG_GRADLE_PROJECT_oxfordKey: ${{ secrets.OXFORD_KEY }}
