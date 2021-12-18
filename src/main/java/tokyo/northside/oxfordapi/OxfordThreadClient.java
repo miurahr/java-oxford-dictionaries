@@ -24,22 +24,20 @@ import java.util.Map;
  */
 public class OxfordThreadClient extends OxfordClientBase {
     private static final String ENDPOINT_URL = "https://od-api.oxforddictionaries.com/api/v2/";
-    private final PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager();
-
     private final String appId;
     private final String appKey;
 
     public OxfordThreadClient(final String appId, final String appKey) {
         this.appId = appId;
         this.appKey = appKey;
-        cm.setMaxTotal(100);
     }
 
     @Override
     public Map<String, List<Result>> queryEntries(final Collection<String> words, final String language,
                                                   final boolean strict) throws OxfordClientException {
         Map<String, List<Result>> result = new HashMap<>();
-        try (CloseableHttpClient httpclient = HttpClients.custom()
+        try (PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager();
+             CloseableHttpClient httpclient = HttpClients.custom()
                 .setConnectionManager(cm)
                 .build()) {
             final List<RequestFactory> requests = new ArrayList<>();
@@ -59,7 +57,8 @@ public class OxfordThreadClient extends OxfordClientBase {
     public Map<String, List<Result>> queryTranslations(final Collection<String> words, final String source,
                                                        final String target) throws OxfordClientException {
         Map<String, List<Result>> result = new HashMap<>();
-        try (CloseableHttpClient httpclient = HttpClients.custom()
+        try (PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager();
+             CloseableHttpClient httpclient = HttpClients.custom()
                 .setConnectionManager(cm)
                 .build()) {
             List<RequestFactory> requests = new ArrayList<>();
