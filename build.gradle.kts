@@ -48,6 +48,13 @@ dependencies {
     testImplementation("commons-io:commons-io:2.11.0")
 }
 
+tasks.named<Test>("test") {
+    useJUnitPlatform()
+    onlyIf {
+        project.hasProperty("oxfordKey") && project.hasProperty("oxfordId")
+    }
+}
+
 spotbugs {
     excludeFilter.set(project.file("config/spotbugs/exclude.xml"))
     tasks.spotbugsMain {
