@@ -39,7 +39,7 @@ repositories {
 
 dependencies {
     implementation("org.apache.httpcomponents.client5:httpclient5:5.1.2")
-    implementation("com.fasterxml.jackson.core:jackson-core:2.13.0")
+    implementation("com.fasterxml.jackson.core:jackson-core:2.13.1")
     implementation("com.fasterxml.jackson.core:jackson-databind:2.13.0")
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.13.0")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
