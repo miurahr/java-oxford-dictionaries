@@ -7,7 +7,7 @@ plugins {
     `java-library-distribution`
     `maven-publish`
     id("com.github.spotbugs") version "5.0.5"
-    id("com.diffplug.spotless") version "6.2.0"
+    id("com.diffplug.spotless") version "6.2.1"
     id("com.palantir.git-version") version "0.13.0"
     id("com.github.kt3k.coveralls") version "2.12.0"
     id("org.sonatype.gradle.plugins.scan") version "2.2.2"
