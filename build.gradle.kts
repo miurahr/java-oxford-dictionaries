@@ -10,7 +10,7 @@ plugins {
     id("com.diffplug.spotless") version "6.2.1"
     id("com.palantir.git-version") version "0.13.0"
     id("com.github.kt3k.coveralls") version "2.12.0"
-    id("org.sonatype.gradle.plugins.scan") version "2.2.2"
+    id("org.sonatype.gradle.plugins.scan") version "2.2.3"
     id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
 }
 
