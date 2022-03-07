@@ -44,7 +44,7 @@ dependencies {
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.13.1")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
     testImplementation("org.junit.jupiter:junit-jupiter-engine:5.8.2")
-    testImplementation("org.codehaus.groovy:groovy-all:3.0.9")
+    testImplementation("org.codehaus.groovy:groovy-all:3.0.10")
     testImplementation("commons-io:commons-io:2.11.0")
 }
 
