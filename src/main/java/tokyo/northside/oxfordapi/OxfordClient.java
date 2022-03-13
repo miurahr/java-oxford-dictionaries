@@ -9,11 +9,14 @@ import org.apache.hc.client5.http.impl.classic.HttpClients;
 import tokyo.northside.oxfordapi.dtd.Result;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Oxford dictionaries API access client.
@@ -22,7 +25,7 @@ import java.util.Map;
  */
 public class OxfordClient extends OxfordClientBase {
 
-    private static final String BASE_URL_V2 = "https://od-api.oxforddictionaries.com/api/v2";
+    private static final String BASE_URL = "https://od-api.oxforddictionaries.com/";
     private final String endpointUrl;
     private final String appId;
     private final String appKey;
@@ -47,7 +50,7 @@ public class OxfordClient extends OxfordClientBase {
      * @param appKey AppKey of the OD API credentials.
      */
     public OxfordClient(final String appId, final String appKey) {
-        this(appId, appKey, BASE_URL_V2);
+        this(appId, appKey, BASE_URL);
     }
 
     @Override
@@ -72,10 +75,12 @@ public class OxfordClient extends OxfordClientBase {
     @Override
     public List<Result> queryTranslation(final String word, final String source, final String target)
             throws OxfordClientException {
+        Set<String> fields = new HashSet<>(Arrays.asList("definitions", "pronunciations"));
         RequestFactory f = new RequestFactory(appId, appKey, endpointUrl)
                 .setType(RequestFactory.QueryType.TRANSLATIONS)
                 .setSourceLanguage(source)
                 .setTargetLanguage(target)
+                .setFields(fields)
                 .setQueryWord(word);
         return query(f.getUrl(), f.getHeader());
     }
@@ -106,6 +111,7 @@ public class OxfordClient extends OxfordClientBase {
                 .setType(RequestFactory.QueryType.ENTRIES)
                 .setLanguage(language)
                 .setQueryWord(word)
+                .setFields(Collections.singleton("definitions"))
                 .setStrictMatch(strict);
         return query(f.getUrl(), f.getHeader());
     }

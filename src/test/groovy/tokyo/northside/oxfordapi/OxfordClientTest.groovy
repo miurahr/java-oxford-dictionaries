@@ -3,10 +3,10 @@ package tokyo.northside.oxfordapi
 import org.junit.Test
 import tokyo.northside.oxfordapi.dtd.Result
 
-import static org.junit.Assert.*
+import static org.junit.Assert.assertEquals
 
 class OxfordClientTest {
-    def ENDPOINT_URL = "https://od-api.oxforddictionaries.com/api/v2/"
+    def ENDPOINT_URL = "https://od-api.oxforddictionaries.com/"
     def appId = System.properties.getProperty("oxfordId")
     def appKey = System.properties.getProperty("oxfordKey")
 
