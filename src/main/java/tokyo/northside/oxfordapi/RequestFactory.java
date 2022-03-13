@@ -17,8 +17,8 @@ public class RequestFactory {
         TRANSLATIONS,
     }
 
+    private static final String ENDPOINT_URL = "https://od-api.oxforddictionaries.com";
     private static final String BASE_PATH = "/api/v2/";
-    private final String endpointUrl;
     private final String appId;
     private final String appKey;
 
@@ -39,12 +39,7 @@ public class RequestFactory {
      */
     private Set<String> fields;
 
-    public RequestFactory(final String appId, final String appKey, final String endpointHost) {
-        if (endpointHost.endsWith("/")) {
-            this.endpointUrl = endpointHost.substring(0, endpointHost.length() - 1);
-        } else {
-            this.endpointUrl = endpointHost;
-        }
+    public RequestFactory(final String appId, final String appKey) {
         this.appId = appId;
         this.appKey = appKey;
         strictMatch = "false";
@@ -159,7 +154,7 @@ public class RequestFactory {
         if (queryWord == null) {
             throw new OxfordClientException("Query word is mandatory");
         }
-        return String.format("%s%s?%s", endpointUrl, getPath(), getQueryString());
+        return String.format("%s%s?%s", ENDPOINT_URL, getPath(), getQueryString());
     }
 
     public String getQueryWord() {

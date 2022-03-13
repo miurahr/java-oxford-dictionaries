@@ -24,9 +24,6 @@ import java.util.Set;
  * @author Hiroshi Miura
  */
 public class OxfordClient extends OxfordClientBase {
-
-    private static final String BASE_URL = "https://od-api.oxforddictionaries.com/";
-    private final String endpointUrl;
     private final String appId;
     private final String appKey;
 
@@ -35,22 +32,10 @@ public class OxfordClient extends OxfordClientBase {
      *
      * @param appId AppId of the OD API credentials.
      * @param appKey AppKey of the OD API credentials.
-     * @param baseUrl base URL of the OD API v2.
-     */
-    public OxfordClient(final String appId, final String appKey, final String baseUrl) {
-        this.appId = appId;
-        this.appKey = appKey;
-        endpointUrl = baseUrl;
-    }
-
-    /**
-     * Construcotr with default v2 URL.
-     *
-     * @param appId AppId of the OD API credentials.
-     * @param appKey AppKey of the OD API credentials.
      */
     public OxfordClient(final String appId, final String appKey) {
-        this(appId, appKey, BASE_URL);
+        this.appId = appId;
+        this.appKey = appKey;
     }
 
     @Override
@@ -76,7 +61,7 @@ public class OxfordClient extends OxfordClientBase {
     public List<Result> queryTranslation(final String word, final String source, final String target)
             throws OxfordClientException {
         Set<String> fields = new HashSet<>(Arrays.asList("definitions", "pronunciations"));
-        RequestFactory f = new RequestFactory(appId, appKey, endpointUrl)
+        RequestFactory f = new RequestFactory(appId, appKey)
                 .setType(RequestFactory.QueryType.TRANSLATIONS)
                 .setSourceLanguage(source)
                 .setTargetLanguage(target)
@@ -107,7 +92,7 @@ public class OxfordClient extends OxfordClientBase {
     @Override
     public List<Result> queryEntry(final String word, final String language, final boolean strict)
             throws OxfordClientException {
-        RequestFactory f = new RequestFactory(appId, appKey, endpointUrl)
+        RequestFactory f = new RequestFactory(appId, appKey)
                 .setType(RequestFactory.QueryType.ENTRIES)
                 .setLanguage(language)
                 .setQueryWord(word)

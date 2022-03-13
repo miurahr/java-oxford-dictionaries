@@ -23,7 +23,6 @@ import java.util.Map;
  * @author Hiroshi Miura
  */
 public class OxfordThreadClient extends OxfordClientBase {
-    private static final String ENDPOINT_URL = "https://od-api.oxforddictionaries.com/api/v2/";
     private final String appId;
     private final String appKey;
 
@@ -42,7 +41,7 @@ public class OxfordThreadClient extends OxfordClientBase {
                 .build()) {
             final List<RequestFactory> requests = new ArrayList<>();
             for (final String query : words) {
-                RequestFactory factory = new RequestFactory(appId, appKey, ENDPOINT_URL);
+                RequestFactory factory = new RequestFactory(appId, appKey);
                 factory.setQueryWord(query).setLanguage(language).setStrictMatch(strict);
                 requests.add(factory);
             }
@@ -63,7 +62,7 @@ public class OxfordThreadClient extends OxfordClientBase {
                 .build()) {
             List<RequestFactory> requests = new ArrayList<>();
             for (final String query : words) {
-                RequestFactory factory = new RequestFactory(appId, appKey, ENDPOINT_URL);
+                RequestFactory factory = new RequestFactory(appId, appKey);
                 factory.setQueryWord(query).setSourceLanguage(source).setTargetLanguage(target);
                 requests.add(factory);
             }
