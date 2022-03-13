@@ -3,6 +3,23 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [v0.4.0]
+
+### Added
+* Support fields query parameter
+
+### Deprecated
+* Change client constructor arguments: drop endpointUrl
+
+### Changed
+* Actions: use gradle/gradle-build-actions
+* Bump versions
+  * jackson@2.13.2
+  * groovy@3.0.10
+  * spotbugs@5.0.6
+  * spotless@6.3.0
+  * httpclient5@5.1.3
+ 
 ## [v0.3.1]
 * Fix thread pool shut down error(#22,#23)
 
@@ -31,7 +48,8 @@ All notable changes to this project will be documented in this file.
 ## [v0.1.0]
 * First alpha
 
-[Unreleased]: https://github.com/miurahr/java-oxford-dictionaries/compare/v0.3.1...HEAD
+[Unreleased]: https://github.com/miurahr/java-oxford-dictionaries/compare/v0.4.0...HEAD
+[v0.4.0]: https://github.com/miurahr/java-oxford-dictionaries/compare/v0.3.1...v0.4.0
 [v0.3.1]: https://github.com/miurahr/java-oxford-dictionaries/compare/v0.3.0...v0.3.1
 [v0.3.0]: https://github.com/miurahr/java-oxford-dictionaries/compare/v0.2.0...v0.3.0
 [v0.2.0]: https://github.com/miurahr/java-oxford-dictionaries/compare/v0.1.1...v0.2.0
