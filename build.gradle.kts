@@ -59,12 +59,12 @@ spotbugs {
     excludeFilter.set(project.file("config/spotbugs/exclude.xml"))
     tasks.spotbugsMain {
         reports.create("html") {
-            isEnabled = true
+            enabled = true
         }
     }
     tasks.spotbugsTest {
         reports.create("html") {
-            isEnabled = true
+            enabled = true
         }
     }
 }
