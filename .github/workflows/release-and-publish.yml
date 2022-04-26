@@ -34,9 +34,8 @@ jobs:
         draft: false
         prerelease: false
     - name: Publish package to OSSRH
-      uses: burrunan/gradle-cache-action@v1
+      uses: gradle/gradle-build-action@v2
       with:
-        gradle-version:  wrapper
         arguments: publishToSonatype printVersion
       env:
         ORG_GRADLE_PROJECT_signingKey: ${{ secrets.GPG_SECRET_KEY }}
