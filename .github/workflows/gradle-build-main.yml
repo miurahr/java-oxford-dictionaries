@@ -20,12 +20,12 @@ jobs:
         fetch-depth: 10
     - uses: actions/setup-java@v3
       with:
-        distribution: 'adopt'
+        distribution: 'temurin'
         java-version: '8'
-    - uses: burrunan/gradle-cache-action@v1
+    - uses: kiancross/checkstyle-annotations-action@v1
+    - uses: gradle/gradle-build-action@v2
       with:
-        gradle-version: wrapper
-        arguments: check printVersion
+        arguments: check
       env:
         ORG_GRADLE_PROJECT_oxfordId: ${{ secrets.OXFORD_ID }}
         ORG_GRADLE_PROJECT_oxfordKey: ${{ secrets.OXFORD_KEY }}
