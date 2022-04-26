@@ -5,10 +5,15 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.hc.client5.http.classic.methods.HttpGet;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
 import org.apache.hc.client5.http.impl.classic.HttpClients;
+import org.apache.hc.core5.http.HttpStatus;
+import org.apache.hc.core5.http.ParseException;
+import org.apache.hc.core5.http.io.entity.EntityUtils;
 import tokyo.northside.oxfordapi.dtd.Result;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -119,21 +124,33 @@ public class OxfordClient extends OxfordClientBase {
         try (CloseableHttpClient httpclient = HttpClients.createDefault()) {
             HttpGet httpGet = new HttpGet(requestUrl);
             header.forEach(httpGet::addHeader);
-            response = httpclient.execute(httpGet, RESPONSE_HANDLER);
+            try (CloseableHttpResponse httpResponse = httpclient.execute(httpGet)) {
+                int status = httpResponse.getCode();
+                if (status == HttpStatus.SC_TOO_MANY_REQUESTS) {
+                    throw new OxfordClientException("Got 429 Too many requests, Do you exceed your limit?");
+                }
+                if (status == HttpStatus.SC_FORBIDDEN) {
+                    throw new OxfordClientException("Authorization failed.");
+                }
+                if (status != HttpStatus.SC_NOT_FOUND) {
+                    if (status != HttpStatus.SC_OK) {
+                        throw new OxfordClientException(String.format("Unexpected status %d.", status));
+                    }
+                    response = EntityUtils.toString(httpResponse.getEntity(), StandardCharsets.UTF_8);
+                } else {
+                    return Collections.emptyList();
+                }
+            }
+        } catch (IOException | ParseException e) {
+            throw new OxfordClientException(e.getMessage());
+        }
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode node = mapper.readTree(response);
+            node = node.get("results");
+            return mapper.readValue(node.traverse(), new TypeReference<List<Result>>() { });
         } catch (IOException e) {
             throw new OxfordClientException(e.getMessage());
         }
-        if (response != null) {
-            try {
-                ObjectMapper mapper = new ObjectMapper();
-                JsonNode node = mapper.readTree(response);
-                node = node.get("results");
-                return mapper.readValue(node.traverse(), new TypeReference<List<Result>>() { });
-            } catch (IOException e) {
-                throw new OxfordClientException(e.getMessage());
-            }
-        }
-        return Collections.emptyList();
     }
-
 }

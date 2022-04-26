@@ -53,6 +53,8 @@ tasks.named<Test>("test") {
     onlyIf {
         project.hasProperty("oxfordKey") && project.hasProperty("oxfordId")
     }
+    systemProperty("oxfordKey", project.properties["oxfordKey"].toString())
+    systemProperty("oxfordId", project.properties["oxfordId"].toString())
 }
 
 spotbugs {

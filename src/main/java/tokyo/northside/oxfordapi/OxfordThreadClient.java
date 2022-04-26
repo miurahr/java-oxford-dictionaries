@@ -5,11 +5,16 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.hc.client5.http.classic.methods.HttpGet;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
 import org.apache.hc.client5.http.impl.classic.HttpClients;
 import org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager;
+import org.apache.hc.core5.http.HttpStatus;
+import org.apache.hc.core5.http.ParseException;
+import org.apache.hc.core5.http.io.entity.EntityUtils;
 import tokyo.northside.oxfordapi.dtd.Result;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -141,16 +146,31 @@ public class OxfordThreadClient extends OxfordClientBase {
          */
         @Override
         public void run() {
-            try {
-                String response = httpClient.execute(httpget, RESPONSE_HANDLER);
-                if (response != null) {
-                    synchronized (result) {
-                        result.putAll(parseResponse(word, response));
+            try (CloseableHttpResponse httpResponse = httpClient.execute(httpget)) {
+                String response;
+                int status = httpResponse.getCode();
+                if (status == HttpStatus.SC_TOO_MANY_REQUESTS) {
+                    throw new OxfordClientException("Got 429 Too many requests, Do you exceed your limit?");
+                }
+                if (status == HttpStatus.SC_FORBIDDEN) {
+                    throw new OxfordClientException("Authorization failed.");
+                }
+                if (status != HttpStatus.SC_NOT_FOUND) {
+                    if (status != HttpStatus.SC_OK) {
+                        throw new OxfordClientException(String.format("Unexpected status %d.", status));
+                    } else {
+                        response = EntityUtils.toString(httpResponse.getEntity(), StandardCharsets.UTF_8);
+                        if (response != null) {
+                            synchronized (result) {
+                                result.putAll(parseResponse(word, response));
+                            }
+                        }
                     }
                 }
-            } catch (IOException e) {
-                System.out.println(id + " - error: " + e);
-                System.out.println(id + " - request: " + httpget.getRequestUri());
+            } catch (IOException | ParseException e) {
+                System.out.println(id + " - error: " + e + " for " + httpget.getRequestUri());
+            } catch (OxfordClientException e) {
+                System.out.println(id + " - error: " + e.getMessage());
             }
         }
     }

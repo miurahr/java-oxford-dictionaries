@@ -5,6 +5,11 @@ on:
     branches:
       - main
       - releases/*
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
 
 jobs:
   gradle-check:
@@ -15,12 +20,13 @@ jobs:
         fetch-depth: 10
     - uses: actions/setup-java@v3
       with:
-        distribution: 'adopt'
+        distribution: 'temurin'
         java-version: '8'
-    - uses: burrunan/gradle-cache-action@v1
-      with:
-        gradle-version: wrapper
-        arguments: check printVersion
+    - uses: kiancross/checkstyle-annotations-action@v1
+    - name: Setup gradle
+      uses: gradle/gradle-build-action@v2
+    - name: Run gradle check
+      run: ./gradlew check
       env:
         ORG_GRADLE_PROJECT_oxfordId: ${{ secrets.OXFORD_ID }}
         ORG_GRADLE_PROJECT_oxfordKey: ${{ secrets.OXFORD_KEY }}

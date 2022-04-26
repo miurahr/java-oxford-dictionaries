@@ -4,11 +4,10 @@ import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.apache.commons.io.IOUtils
-import org.junit.Test
+import org.junit.jupiter.api.Test
 import tokyo.northside.oxfordapi.dtd.Result
 
-import static org.junit.Assert.*
-
+import static org.junit.jupiter.api.Assertions.assertEquals
 
 class OxfordDictionariesTranslationsTest {
 
