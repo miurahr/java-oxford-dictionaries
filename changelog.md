@@ -3,6 +3,20 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [v0.4.1]
+
+### Fixed
+* Update test cases for JUnit 5 (#54)
+* Gradle: test: properly use oxford id/key set in gradle property(#54)
+
+### Changed
+* Bump versions
+  * spotless@6.5.0 (#53)
+  * jackson-databind@2.13.2.2 (#49)
+* Actions: use gradle/gradle-build-aciton@v2 (#54)
+* Actions: use kiancross/checkstyle-annotations-action@v1
+* Actions: use Temurin openjdk 8
+
 ## [v0.4.0]
 
 ### Added
@@ -48,7 +62,8 @@ All notable changes to this project will be documented in this file.
 ## [v0.1.0]
 * First alpha
 
-[Unreleased]: https://github.com/miurahr/java-oxford-dictionaries/compare/v0.4.0...HEAD
+[Unreleased]: https://github.com/miurahr/java-oxford-dictionaries/compare/v0.4.1...HEAD
+[v0.4.1]: https://github.com/miurahr/java-oxford-dictionaries/compare/v0.4.0...v0.4.1
 [v0.4.0]: https://github.com/miurahr/java-oxford-dictionaries/compare/v0.3.1...v0.4.0
 [v0.3.1]: https://github.com/miurahr/java-oxford-dictionaries/compare/v0.3.0...v0.3.1
 [v0.3.0]: https://github.com/miurahr/java-oxford-dictionaries/compare/v0.2.0...v0.3.0
