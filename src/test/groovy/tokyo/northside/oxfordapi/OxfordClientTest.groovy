@@ -1,9 +1,10 @@
 package tokyo.northside.oxfordapi
 
-import org.junit.Test
+import org.junit.jupiter.api.Test
+import org.slf4j.LoggerFactory
 import tokyo.northside.oxfordapi.dtd.Result
 
-import static org.junit.Assert.assertEquals
+import static org.junit.jupiter.api.Assertions.assertEquals
 
 class OxfordClientTest {
     def appId = System.properties.getProperty("oxfordId")

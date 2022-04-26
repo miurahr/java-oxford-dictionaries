@@ -1,12 +1,11 @@
 package tokyo.northside.oxfordapi
 
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
-import static org.junit.Assert.assertEquals
+import static org.junit.jupiter.api.Assertions.assertEquals
+
 
 class RequestFactoryTest {
-
-    def BASE_URL = "https://od-api.oxforddictionaries.com/"
 
     @Test
     void requestFactoryUrlTest() {
@@ -18,7 +17,7 @@ class RequestFactoryTest {
         def fields = new HashSet()
         fields.add("definitions")
         fields.add("pronunciations")
-        RequestFactory f = new RequestFactory(appId, appKey, BASE_URL)
+        RequestFactory f = new RequestFactory(appId, appKey)
             .setType(RequestFactory.QueryType.TRANSLATIONS)
             .setSourceLanguage(source)
             .setTargetLanguage(target)
