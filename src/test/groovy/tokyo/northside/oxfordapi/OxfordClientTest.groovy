@@ -1,7 +1,6 @@
 package tokyo.northside.oxfordapi
 
 import org.junit.jupiter.api.Test
-import org.slf4j.LoggerFactory
 import tokyo.northside.oxfordapi.dtd.Result
 
 import static org.junit.jupiter.api.Assertions.assertEquals
