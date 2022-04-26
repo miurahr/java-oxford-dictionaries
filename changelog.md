@@ -2,7 +2,8 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
-## [v0.4.2]
+
+## [v0.4.3]
 
 ### Fixed
 * Actions: update release script
@@ -66,8 +67,8 @@ All notable changes to this project will be documented in this file.
 ## [v0.1.0]
 * First alpha
 
-[Unreleased]: https://github.com/miurahr/java-oxford-dictionaries/compare/v0.4.2...HEAD
-[v0.4.2]: https://github.com/miurahr/java-oxford-dictionaries/compare/v0.4.1...v0.4.2
+[Unreleased]: https://github.com/miurahr/java-oxford-dictionaries/compare/v0.4.3...HEAD
+[v0.4.3]: https://github.com/miurahr/java-oxford-dictionaries/compare/v0.4.1...v0.4.3
 [v0.4.1]: https://github.com/miurahr/java-oxford-dictionaries/compare/v0.4.0...v0.4.1
 [v0.4.0]: https://github.com/miurahr/java-oxford-dictionaries/compare/v0.3.1...v0.4.0
 [v0.3.1]: https://github.com/miurahr/java-oxford-dictionaries/compare/v0.3.0...v0.3.1
