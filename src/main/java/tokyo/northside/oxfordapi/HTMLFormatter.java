@@ -9,13 +9,12 @@ import tokyo.northside.oxfordapi.dtd.Translation;
 
 import java.util.List;
 
-public final class HTMLFormatter {
+public final class HTMLFormatter implements IFormatter {
 
-    private HTMLFormatter() {
+    public HTMLFormatter() {
     }
 
-    public static OxfordDictionaryEntry formatTranslations(final LexicalEntry lexicalEntry) {
-        String title = lexicalEntry.getText();
+    public String formatTranslations(final LexicalEntry lexicalEntry) {
         StringBuilder sb = new StringBuilder("<ol>");
         for (Entry entry : lexicalEntry.getEntries()) {
             for (Sense sense : entry.getSenses()) {
@@ -28,10 +27,10 @@ public final class HTMLFormatter {
             }
         }
         sb.append("</ol>");
-        return new OxfordDictionaryEntry(title, sb.toString());
+        return sb.toString();
     }
 
-    public static String formatDefinitions(final LexicalEntry lexicalEntry) {
+    public String formatDefinitions(final LexicalEntry lexicalEntry) {
         String category = lexicalEntry.getLexicalCategory().getText();
         StringBuilder sb = new StringBuilder("[").append(category).append("]&nbsp;");
         for (Entry entry : lexicalEntry.getEntries()) {

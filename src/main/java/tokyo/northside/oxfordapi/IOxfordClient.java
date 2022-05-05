@@ -19,11 +19,21 @@ public interface IOxfordClient {
     Map<String, List<Result>> queryEntries(Collection<String> words, String language, boolean strict)
             throws OxfordClientException;
 
-    List<OxfordDictionaryEntry> getDefinitions(Collection<String> words, String language, boolean strict)
+    List<OxfordDictionaryEntry> getDefinitions(Collection<String> words, String language, boolean strict, IFormatter formatter)
             throws OxfordClientException;
 
-    List<OxfordDictionaryEntry> getTranslations(Collection<String> words, String source, String target)
+    default List<OxfordDictionaryEntry> getDefinitions(Collection<String> words, String language, boolean strict)
+        throws OxfordClientException {
+        return getDefinitions(words, language, strict, new HTMLFormatter());
+    }
+
+    List<OxfordDictionaryEntry> getTranslations(Collection<String> words, String source, String target, IFormatter formatter)
             throws OxfordClientException;
+
+    default List<OxfordDictionaryEntry> getTranslations(Collection<String> words, String source, String target)
+            throws OxfordClientException {
+        return getTranslations(words, source, target, new HTMLFormatter());
+    }
 
     void close();
 }

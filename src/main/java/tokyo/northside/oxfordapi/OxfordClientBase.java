@@ -16,36 +16,35 @@ import java.util.List;
 public abstract class OxfordClientBase implements IOxfordClient {
 
     public List<OxfordDictionaryEntry> getTranslations(final Collection<String> words, final String source,
-                                                       final String target) throws OxfordClientException {
+                                                       final String target, final IFormatter formatter)
+            throws OxfordClientException {
         List<OxfordDictionaryEntry> dictionaryEntries = new ArrayList<>();
-        queryTranslations(words, source, target).entrySet()
-                .forEach(entry -> {
-                    for (Result result: entry.getValue()) {
-                        for (LexicalEntry lexicalEntry: result.getLexicalEntries()) {
-                            dictionaryEntries.add(new OxfordDictionaryEntry(
-                                    entry.getKey(),
-                                    lexicalEntry.getText(),
-                                    HTMLFormatter.formatDefinitions(lexicalEntry)));
-                        }
-                    }
-                });
+        queryTranslations(words, source, target).forEach((key, value) -> {
+            for (Result result : value) {
+                for (LexicalEntry lexicalEntry : result.getLexicalEntries()) {
+                    dictionaryEntries.add(new OxfordDictionaryEntry(
+                            key,
+                            lexicalEntry.getText(),
+                            formatter.formatTranslations(lexicalEntry)));
+                }
+            }
+        });
         return dictionaryEntries;
     }
 
     public List<OxfordDictionaryEntry> getDefinitions(final Collection<String> words, final String language,
-                                                      final boolean strict) throws OxfordClientException {
+                                                      final boolean strict, IFormatter formatter) throws OxfordClientException {
         List<OxfordDictionaryEntry> dictionaryEntries = new ArrayList<>();
-        queryEntries(words, language, strict).entrySet()
-                .forEach(entry -> {
-                    for (Result result: entry.getValue()) {
-                        for (LexicalEntry lexicalEntry: result.getLexicalEntries()) {
-                            dictionaryEntries.add(new OxfordDictionaryEntry(
-                                    entry.getKey(),
-                                    lexicalEntry.getText(),
-                                    HTMLFormatter.formatDefinitions(lexicalEntry)));
-                        }
-                    }
-                });
+        queryEntries(words, language, strict).forEach((key, value) -> {
+            for (Result result : value) {
+                for (LexicalEntry lexicalEntry : result.getLexicalEntries()) {
+                    dictionaryEntries.add(new OxfordDictionaryEntry(
+                            key,
+                            lexicalEntry.getText(),
+                            formatter.formatDefinitions(lexicalEntry)));
+                }
+            }
+        });
         return dictionaryEntries;
     }
 

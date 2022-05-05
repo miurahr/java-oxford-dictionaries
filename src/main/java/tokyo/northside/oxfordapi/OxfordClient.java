@@ -28,7 +28,7 @@ import java.util.Set;
  *
  * @author Hiroshi Miura
  */
-public class OxfordClient extends OxfordClientBase {
+public class OxfordClient extends OxfordClientBase implements IOxfordClient {
     private final String appId;
     private final String appKey;
 
