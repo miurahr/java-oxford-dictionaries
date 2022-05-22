@@ -46,6 +46,8 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-engine:5.8.2")
     testImplementation("org.codehaus.groovy:groovy-all:3.0.10")
     testImplementation("commons-io:commons-io:2.11.0")
+    testImplementation("org.apache.commons:commons-lang3:3.12.0")
+    testImplementation("org.slf4j:slf4j-simple:1.7.32")
 }
 
 tasks.named<Test>("test") {
